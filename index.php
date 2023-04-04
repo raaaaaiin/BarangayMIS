@@ -12,8 +12,8 @@
           <a href="#">About</a>
         </td>
         <td align="right">
-          <a href="#">Log in</a>
-          <a href="#">Register</a>
+          <a href="Registration/login.php">Log in</a>
+          <a href="Registration/register.php">Register</a>
         </td>
       </tr>
     </table>
