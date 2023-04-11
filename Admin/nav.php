@@ -48,7 +48,7 @@
     <a href="index.php#section2" target="_Parent">About</a>
     <a href="index.php#loc" target="_Parent">Contact</a>
     <a href="home.php" target="_Parent">Dashboard</a>
-    <a href="accountLogout.php" target="_Parent">Log Out</a>
+    <a href="../index.php" target="_Parent">Log Out</a>
   </nav>
 </body>
 </html>

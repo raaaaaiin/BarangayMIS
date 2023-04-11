@@ -97,29 +97,23 @@ require_once('../db.php');
     </div>
     <div class="sidebar">
         <div class="profile">
-            <img src="asset/Portrait_Placeholder.png" alt="Profile Picture">
+        <img src="https://via.placeholder.com/75" alt="Profile Picture">
+
             <div>
                 <div class="profile-name">Name</div>
                 <div class="profile-position">Position</div>
             </div>
         </div>
         <?php
-        if ($_SESSION['position'] == 'Barangay Secretary') {
+        
             echo '
-        <a href="Communication/index.php" target="FraDisplay" class="active">Communication</a>
+        <a href="Communication/index.php" target="FraDisplay">Communication</a>
         <a href="Resident/index.php" target="FraDisplay">Residents</a>
 		<a href="Blotter/index.php" target="FraDisplay">Blotter</a>
 		<a href="Certificate/index.php" target="FraDisplay">Certificates</a>
 		<a href="Profile/index.php" target="FraDisplay">Profile</a>
 		';
-		}
-		if ($_SESSION['position'] == 'Barangay Captain') {
-		echo '
-		<a href="Communication/index.php" target="FraDisplay" class="active">Communication</a>
-		<a href="Resident/index.php" target="FraDisplay">Residents</a>
-		<a href="Profile/index.php" target="FraDisplay">Profile</a>
-		';
-		}
+		
 		?>
 		<a href="Logout.php" class="logout-link">Logout</a>
 		

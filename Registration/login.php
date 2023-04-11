@@ -34,6 +34,14 @@
           if (xhr.readyState === 4 && xhr.status === 200) {
             // Update the result div with the response from the server
             document.getElementById("result").innerHTML = xhr.responseText;
+            alert(xhr.responseText);
+            if (xhr.responseText === "success") {
+      // Redirect to ../Admin/index.php
+      window.location.href = "../Admin/index.php";
+    } else {
+      // Display the response text in the "result" element
+      document.getElementById("result").innerHTML = xhr.responseText;
+    }
           }
         };
         xhr.send(formData);
