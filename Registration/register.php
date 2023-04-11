@@ -62,7 +62,20 @@
       <input type="password" name="password" id="password"><br>
       <label for="role">Role:</label>
       <input type="text" name="role" id="role"><br>
-      <input type="submit" value="Register">
+      <a href="registerRes.php">Register</a>
     </form>
+    <script>
+      // Get the registration form element
+      var registrationForm = document.getElementById("registration-form");
+
+      // Add an event listener for when the form is submitted
+      registrationForm.addEventListener("submit", function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Redirect to registerRes.php
+        window.location.href = "registerRes.php";
+      });
+    </script>
   </body>
 </html>
