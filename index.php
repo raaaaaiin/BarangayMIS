@@ -2,6 +2,70 @@
 <html>
   <head>
     <title>Barangay Management System</title>
+    <style>
+      /* Set the font family and font size for the entire page */
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+      }
+
+      /* Style the navigation links */
+      nav a {
+        display: inline-block;
+        margin-right: 10px;
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        color: #666;
+      }
+
+      /* Style the login and registration links */
+      .user-links a {
+        display: inline-block;
+        margin-left: 10px;
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .user-links a:hover {
+        color: #666;
+      }
+
+      /* Style the section headings */
+      section h2 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      /* Style the section content */
+      section p {
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+
+      section ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 20px;
+      }
+
+      section li {
+        margin-bottom: 10px;
+      }
+
+      section img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
     <table width="100%">
