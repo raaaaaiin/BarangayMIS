@@ -44,10 +44,10 @@
 </head>
 <body>
   <nav class="navtop">
-    <a href="index.php" target="_Parent">Home</a>
-    <a href="index.php#section2" target="_Parent">About</a>
-    <a href="index.php#loc" target="_Parent">Contact</a>
-    <a href="home.php" target="_Parent">Dashboard</a>
+    <a href="../FrontPage/home.php" target="FraDisplay">Home</a>
+    <a href="../FrontPage/gallery.php" target="FraDisplay">Gallery</a>
+    <a href="../FrontPage/news.php" target="FraDisplay">News</a>
+    <a href="../FrontPage/contact.php" target="FraDisplay">Contact Us</a>
     <a href="../index.php" target="_Parent">Log Out</a>
   </nav>
 </body>

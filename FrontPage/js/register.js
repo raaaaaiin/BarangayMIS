@@ -29,4 +29,26 @@ primaryInformationSection.style.display = "block";
 });
 }
 
-sql
+document.querySelector('#register-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get the form data
+    var formData = new FormData(event.target);
+  
+    // Send an AJAX request to the server
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "controller/register.php");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // Update the result div with the response from the server
+        if (xhr.responseText === "success") {
+          // Redirect to ../Admin/index.php
+          alert("Registered!");
+          location.reload();
+        }else{
+          alert(xhr.responseText);
+        }
+      }
+    };
+    xhr.send(formData);
+});

@@ -107,11 +107,11 @@ require_once('../db.php');
         <?php
         
             echo '
-        <a href="Communication/index.php" target="FraDisplay">Communication</a>
-        <a href="Resident/index.php" target="FraDisplay">Residents</a>
-		<a href="Blotter/index.php" target="FraDisplay">Blotter</a>
-		<a href="Certificate/index.php" target="FraDisplay">Certificates</a>
-		<a href="Profile/index.php" target="FraDisplay">Profile</a>
+        <a href="Communication/index.php" target="FraDisplay">News and Updates</a>
+        <a href="functions/resident.php" target="FraDisplay">Residents (working)</a>
+		<a href="Blotter/index.php" target="FraDisplay">Incident Reports</a>
+		<a href="Certificate/index.php" target="FraDisplay">Service Request</a>
+		
 		';
 		
 		?>
