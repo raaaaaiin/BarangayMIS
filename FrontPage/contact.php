@@ -6,7 +6,7 @@
   <title>Contact Form</title>
   <link rel="stylesheet" href="css/contact.css">
 </head>
-<body>
+<body  style="background-color:#f9f9f9 !important">
   <div class="contact-form-container">
     <h1>Contact Us</h1>
     <form class="contact-form">

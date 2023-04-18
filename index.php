@@ -19,13 +19,13 @@
         }
 
         #navbar {
-            height: 60px;
+            height: 90px;
             z-index: 10;
         }
 
         #content {
-            top: 60px;
-            height: calc(100% - 60px);
+            top: 90px;
+            height: calc(100% - 90px);
             overflow-y: scroll;
         }
     </style>

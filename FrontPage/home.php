@@ -6,43 +6,54 @@
     <link rel="stylesheet" href="css/home.css">
     <title>Barangay Landing Page</title>
 </head>
-<body>
+<body  style="background-color:#f9f9f9 !important">
     <div class="hero-section">
-        <h1>Barangay Sta. Cruz</h1>
-        <h2>Antipolo City</h2>
+        <h1>Sitio Igiban</h1>
+        <h2>Barangay Sta. Cruz Antipolo City</h2>
     </div>
     <div class="main-content">
         <div class="left-column">
-            <img src="https://via.placeholder.com/500" alt="Community Image">
+            <img src="https://stacruzantipolocity.weebly.com/uploads/5/0/8/8/50886061/header_images/1429101212.jpg" alt="Community Image">
         </div>
-        <div class="right-column">
-            <h3>Location</h3>
-            <p>
-                Sitio Labahan is situated in the western part of San Isidro and is bounded by Sitio Matanda, Barangay Dela Paz, and Barangay Mayamot. The community has several residential subdivisions, including Vista Verde Executive Homes, Forest Ridge Homes, and Hilltop Executive Homes.
-            </p>
-            <h4>About Us</h4>
-            <ul>
-                <li>Sitio Igiban is a small residential community located in Barangay Sta. Cruz, Antipolo City.</li>
-                <li>It is situated in the eastern part of Barangay Sta. Cruz and is bounded by Sitio Bagong Nayon, Sitio Bakal, and Barangay Mayamot.</li>
-                <li>The community is mostly residential, with a few small businesses and establishments located along the main road.</li>
-            </ul>
-        </div>
+        <div class="right-column" style="">
+  
+  <div style="border: 1px solid #ecebeb;/* margin-top: 10px; */padding: 10px;padding: 0;">
+    <h3 style="margin: 0;background-color: #333;color: #fff;font-size: 20px;padding: 17px;border-radius: 0;">Location</h3>
+    <p style="margin: 25px;color: #333;font-size: 16px;">
+      Barangay Sta. Cruz is located in the northern part of Antipolo City, Rizal. It is bounded by Barangay Mayamot on the east, Barangay San Jose on the south, Barangay Cupang on the west, and Barangay Santa Cecilia on the north.
+    </p>
+  </div>
+  <div style="border: 1px solid #fff;margin-top: 10px;/* padding: 10px; */border: 1px solid #ecebeb;/* margin-top: 10px; *//* padding: 10px; */padding: 0;">
+    <h4 style="/* background-color: #333; *//* color: #fff; *//* font-size: 18px; *//* padding: 5px; *//* border-radius: 5px; */margin: 0;background-color: #333;color: #fff;font-size: 20px;padding: 17px;border-radius: 0;">About Us</h4>
+    <ul style="margin: 25px;color: #333;font-size: 16px;margin-left: 20px;">
+      <li style="
+    padding-top: 10px;
+">Barangay Sta. Cruz is a vibrant and growing community located in Antipolo City, Rizal.</li>
+      <li style="
+    padding-top: 10px;
+">The barangay is home to a diverse population of around 17,000 residents, who are mostly engaged in agriculture and small-scale businesses.</li>
+      <li style="
+    padding-top: 10px;
+">The community is known for its rich cultural heritage, natural beauty, and warm hospitality, making it a popular destination for visitors and tourists.</li>
+    </ul>
+  </div>
+</div>
     </div>
     <div class="additional-content">
         <div class="card">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail">
+            <img src="https://cdn-icons-png.flaticon.com/512/2633/2633072.png" alt="Thumbnail">
             <h5>History</h5>
-            <p>Antipolo City has a rich and colorful history that dates back to pre-colonial times. The area was originally inhabited by the native Tagalog people, who established a small settlement in what is now known as Antipolo.</p>
+            <p>Barangay Sta. Cruz has a long and fascinating history that dates back to the Spanish colonial period. The area was originally settled by the native Tagalog people, who were later converted to Christianity by the Spanish missionaries.</p>
         </div>
         <div class="card">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail">
+            <img src="https://cdn-icons-png.flaticon.com/512/96/96648.png" alt="Thumbnail">
             <h5>Features</h5>
-            <p>One of the notable features of Sitio Igiban is the scenic view of the Sierra Madre mountain range, which can be seen from certain parts of the community.</p>
+            <p>Barangay Sta. Cruz is known for its natural beauty and scenic attractions, including the Hinulugang Taktak National Park, which features a waterfall and natural pools that are popular with visitors and locals alike.</p>
         </div>
         <div class="card">
-            <img src="https://via.placeholder.com/150" alt="Thumbnail">
+            <img src="https://t3.ftcdn.net/jpg/04/09/84/74/360_F_409847498_k9QDG9pOJ8FPT9LM7iQSfCTiAoLaaFvA.jpg" alt="Thumbnail">
             <h5>Environment</h5>
-            <p>The area is also known for its quiet and peaceful atmosphere, making it a popular choice for those looking for a more relaxed living environment.</p>
+            <p>The barangay is committed to preserving its natural environment and promoting sustainable development. It has implemented various initiatives to reduce waste, conserve water, and protect its natural resources.</p>
         </div>
     </div>
 </body>
