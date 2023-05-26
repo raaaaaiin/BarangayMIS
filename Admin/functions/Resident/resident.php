@@ -78,7 +78,7 @@ tbody tr:hover {
   </thead>
   <tbody>
     <?php
-    include '../../db.php';
+    include '../../../db.php';
 
       $sql = "SELECT * FROM users";
       $result = mysqli_query($conn, $sql);

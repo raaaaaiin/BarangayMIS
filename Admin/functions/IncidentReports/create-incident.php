@@ -65,7 +65,34 @@
 <body>
     <div class="container">
         <h1>Create Incident Report</h1>
-        <form method="POST" action="create-incident.php">
+        <?php
+        // Include the database connection file
+        include_once '../../../db.php';
+
+        // Check if the form is submitted
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Retrieve the form data
+            $resident_id = $_POST['resident_id'];
+            $date_reported = $_POST['date_reported'];
+            $time_reported = $_POST['time_reported'];
+            $incident_type = $_POST['incident_type'];
+            $incident_description = $_POST['incident_description'];
+            $incident_location = $_POST['incident_location'];
+            $incident_status = $_POST['incident_status'];
+
+            // Prepare the SQL statement to insert the data
+            $sql = "INSERT INTO resident_incident_report (resident_id, date_reported, time_reported, incident_type, incident_description, incident_location, incident_status, date_created, date_updated)
+                    VALUES ('$resident_id', '$date_reported', '$time_reported', '$incident_type', '$incident_description', '$incident_location', '$incident_status', NOW(), NOW())";
+
+            // Execute the SQL statement
+            if ($conn->query($sql) === TRUE) {
+                echo '<p>Incident report created successfully!</p>';
+            } else {
+                echo '<p>Error: ' . $sql . '<br>' . $conn->error . '</p>';
+            }
+        }
+        ?>
+        <form method="POST" action="">
             <div class="form-row">
                 <label for="resident_id">Resident ID:</label>
                 <input type="text" name="resident_id" id="resident_id" required>
@@ -88,7 +115,7 @@
 
             <div class="form-row">
                 <label for="incident_description">Incident Description:</label>
-                <textarea name="incident_description" id="incident_description" required></textarea>
+                <textarea name="incident_description" id="incident_description" rows="5" required></textarea>
             </div>
 
             <div class="form-row">
@@ -102,7 +129,7 @@
             </div>
 
             <div class="form-row">
-                <input type="submit" value="Create">
+                <input type="submit" value="Create Incident Report">
             </div>
         </form>
     </div>

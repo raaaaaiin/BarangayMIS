@@ -97,32 +97,26 @@ require_once('../db.php');
     </div>
     <div class="sidebar">
         <div class="profile">
-            <img src="https://via.placeholder.com/75" alt="Profile Picture">
+        <img src="https://via.placeholder.com/75" alt="Profile Picture">
+
             <div>
                 <div class="profile-name">Name</div>
                 <div class="profile-position">Position</div>
             </div>
         </div>
-        
         <?php
-        $adminFunctionsDir = 'functions/';
-        $adminFunctions = [
-            'BarangayStaff' => [ 'show-staff.php' => 'Barangay Staff'],
-            'FrontEnd' => ['Gallery.php' => 'Gallery'],
-            'IncidentReports' => ['show-incident.php' => 'Incident Report'],
-            'NewsUpdate' => [ 'TableNews.php' => 'News and Updates'],
-            'Resident' => [ 'resident.php' => 'Residents'],
-            'BarangayClearance' => ['index.php' => 'Service']
-        ];
         
-        foreach ($adminFunctions as $folder => $files) {
-            foreach ($files as $file => $title) {
-                echo '<a href="' . $adminFunctionsDir . $folder . '/' . $file . '" target="FraDisplay">' . $title . '</a>';
-            }
-        }
-        ?>
-
-        <a href="Logout.php" class="logout-link">Logout</a>
-    </div>
-</body>
-</html>
+            echo '
+        <a href="Communication/index.php" target="FraDisplay">News and Updates</a>
+        <a href="functions/resident.php" target="FraDisplay">Residents (working)</a>
+		<a href="Blotter/index.php" target="FraDisplay">Incident Reports</a>
+		<a href="Certificate/index.php" target="FraDisplay">Service Request</a>
+		
+		';
+		
+		?>
+		<a href="Logout.php" class="logout-link">Logout</a>
+		
+		</div>
+		</body>
+		</html>

@@ -9,6 +9,7 @@ include('../db.php');
 
 <style> .info {
         color: rgba(29, 33, 36, 0.76);
+        background-color: #e7f3fe;
         border-left: 6px solid #2196F3;
     }
 body {
