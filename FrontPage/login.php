@@ -8,7 +8,7 @@
 </head>
 <body  style="background-color:#f9f9f9 !important">
     <div class="left-side">
-        <img src="https://scontent.fmnl25-2.fna.fbcdn.net/v/t1.15752-9/338990456_1237279880514780_2488969850375586482_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=ae9488&_nc_ohc=2tn84o02ONwAX9Fte-w&_nc_ht=scontent.fmnl25-2.fna&oh=03_AdQCHzwG733XEY9NQEjO1KpOWBypcMotrSnq_crIvM3V1w&oe=64663CD7" alt="Background image" class="background-image">
+        <img src="../public/Image/Wall.jpg" alt="Background image" class="background-image">
        
     </div>
     <div class="right-side">

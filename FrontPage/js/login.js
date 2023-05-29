@@ -15,11 +15,15 @@ loginForm.addEventListener("submit", function(event) {
     if (xhr.readyState === 4 && xhr.status === 200) {
       // Update the result div with the response from the server
       
-      if (xhr.responseText === "success") {
+      if (xhr.responseText === "admin") {
         // Redirect to ../Admin/index.php
         parent.location.href = "../Admin/index.php";
-      }else{
+      }else  if (xhr.responseText === "client") {
+        parent.location.href = "../Client/index.php";
+      }
+      else{
         alert("Invalid Credentials!");
+        alert(xhr.responseText);
       }
     }
   };

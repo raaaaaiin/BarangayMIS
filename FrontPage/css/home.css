@@ -6,7 +6,7 @@ body {
 }
 
 .hero-section {
-    background-image: url('https://scontent.fmnl25-4.fna.fbcdn.net/v/t1.15752-9/339435993_761554465633397_4886018276513841023_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=hnyyoHe7FiQAX9P_8US&_nc_oc=AQn9fSF4ry_bDjdyhQf5Xegh_XlP0Wbk_wFQqrIdjaStPZk0EUoitex9pAKu4vlNtsZdMTyD9ZxGD9u-RbuXh9QT&_nc_ht=scontent.fmnl25-4.fna&oh=03_AdTsFFghwu0w3GFfFD7fgUQVNyW5VppulfxvmQA8PcIAbA&oe=64660969');
+    background-image: url('../../Public/Image/Wall.jpg');
     background-size: cover;
     height: 800px;
     display: flex;

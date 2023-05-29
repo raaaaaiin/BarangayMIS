@@ -99,7 +99,7 @@ require_once('../db.php');
         <div class="profile">
             <img src="https://via.placeholder.com/75" alt="Profile Picture">
             <div>
-                <div class="profile-name">Name</div>
+                <div class="profile-name"><?php echo $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'] ?></div>
                 <div class="profile-position">Position</div>
             </div>
         </div>
@@ -107,10 +107,11 @@ require_once('../db.php');
         <?php
         $adminFunctionsDir = 'functions/';
         $adminFunctions = [
+            'NewsUpdate' => [ 'ShowNews.php' => 'Home','TableNews.php' => 'News and Updates'],
             'BarangayStaff' => [ 'show-staff.php' => 'Barangay Staff'],
-            'FrontEnd' => ['Gallery.php' => 'Gallery'],
+            'FrontEnd' => ['ShowGallery.php' => 'Gallery'],
             'IncidentReports' => ['show-incident.php' => 'Incident Report'],
-            'NewsUpdate' => [ 'TableNews.php' => 'News and Updates'],
+            
             'Resident' => [ 'resident.php' => 'Residents'],
             'BarangayClearance' => ['index.php' => 'Service']
         ];

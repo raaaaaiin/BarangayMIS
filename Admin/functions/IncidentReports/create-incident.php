@@ -38,7 +38,7 @@
         .form-row input[type="date"],
         .form-row input[type="time"],
         .form-row textarea {
-            width: 100%;
+            width: 98%;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;

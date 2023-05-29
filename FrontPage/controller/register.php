@@ -22,10 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $query = "INSERT INTO users (email, username, password, firstname, middlename, lastname, housenumber, street, barangay, city, state, zip, phone, dob, gender, occupation) VALUES ('$email', '$username', '$password', '$firstname', '$middlename', '$lastname', '$housenumber', '$street', '$barangay', '$city', '$state', '$zip', '$phone', '$dob', '$gender', '$occupation')";
 
   if (mysqli_query($conn, $query)) {
-    echo 'success';
+    
+    $prev_id = mysqli_insert_id($conn);  // Getting last inserted ID
+    
   } else {
     echo $query;
   }
+
+  $query = "INSERT INTO login_acc (id, username, password, role) VALUES ('$prev_id', '$username', '$password', 'client')";
+  if (mysqli_query($conn, $query)) {
+    echo 'success';
+  
+  } else {
+    echo $query;
+  }
+
 }
 
 mysqli_close($conn);

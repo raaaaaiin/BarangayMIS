@@ -44,7 +44,11 @@
     </style>
 </head>
 <body>
-    <h1>Incident Reports</h1>
+    <h1>Incident Reports <a href="create-incident.php" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; position: relative;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+    </svg>
+</a></h1>
     <table>
         <tr>
             <th>Incident ID</th>
