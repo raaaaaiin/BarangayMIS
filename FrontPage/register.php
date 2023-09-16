@@ -23,7 +23,7 @@
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
 
-      <button type="button" id="next-btn">Next</button>
+      <button type="button" id="next-btnfirst">Next</button>
     
   </section>
 
