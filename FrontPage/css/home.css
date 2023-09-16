@@ -7,7 +7,7 @@ body {
 
 .hero-section {
     background-image: url('../../Public/Image/Wall.jpg');
-    background-size: cover;
+    background-size: contain;
     height: 800px;
     display: flex;
     flex-direction: column;
