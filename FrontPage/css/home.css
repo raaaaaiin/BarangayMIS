@@ -7,15 +7,38 @@ body {
 
 .hero-section {
     background-image: url('../../Public/Image/Wall.jpg');
-    background-size: contain;
+    background-size: cover;
     height: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #fff;
+    position: relative; /* Add position relative to contain the pseudo-element */
 }
 
+/* Styling for the black background with 50% opacity */
+.hero-text-container {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    padding: 10px; /* Add some padding to the container */
+    border-radius: 10px; /* Optional: Add border-radius for rounded corners */
+    text-align: center; /* Center the text horizontally */
+}
+
+/* Styling for the hero title */
+.hero-title {
+    /* Add styles for your <h1> element here */
+    font-size: 36px;
+    font-weight: bold;
+   
+}
+
+/* Styling for the hero subtitle */
+.hero-subtitle {
+    /* Add styles for your <h2> element here */
+    font-size: 24px;
+}
 h1 {
     font-size: 48px;
     margin-bottom: 10px;

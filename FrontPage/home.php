@@ -7,10 +7,12 @@
     <title>Barangay Landing Page</title>
 </head>
 <body  style="background-color:#f9f9f9 !important">
-    <div class="hero-section">
-        <h1>Sitio Igiban</h1>
-        <h2>Barangay Sta. Cruz Antipolo City</h2>
+<div class="hero-section">
+    <div class="hero-text-container">
+        <h1 class="hero-title">SITIO IGIBAN</h1>
+        <h2 class="hero-subtitle">Barangay Sta. Cruz Antipolo City</h2>
     </div>
+</div>
     <div class="main-content">
         <div class="left-column">
             <img src="https://stacruzantipolocity.weebly.com/uploads/5/0/8/8/50886061/header_images/1429101212.jpg" alt="Community Image">
@@ -71,7 +73,7 @@ function updateBackgroundImage(imageUrls) {
     setInterval(() => {
         // Change the background image../public/image/Gallery_20230530165523.jpg
         heroSection.style.backgroundImage = `url(../public/image/${imageUrls[currentIndex]})`;
-      alert(heroSection.style.backgroundImage);
+
         // Increment the index, and loop back to the beginning if needed
         currentIndex = (currentIndex + 1) % imageUrls.length;
     }, 5000); // Change image every 5 seconds
