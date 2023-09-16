@@ -86,6 +86,7 @@
         <th>Image</th>
         <th>Caption</th>
         <th>Date Uploaded</th>
+        <th>Status</th>
         <th class="actions">Actions</th>
       </tr>
     </thead>
@@ -96,9 +97,10 @@
           echo '<td><img src="' . $uploadDir . $image['image_url'] . '" width="100"></td>';
           echo '<td>' . htmlspecialchars($image['caption']) . '</td>';
           echo '<td>' . htmlspecialchars($image['upload_date']) . '</td>';
+          echo '<td>' . $image['active'] . '</td>';
           echo '<td class="actions">';
           echo '<a href="edit-gallery.php?id=' . htmlspecialchars($image['id']) . '" class="edit-btn">Edit</a>';
-          echo '<a href="delete-gallery.php?id=' . htmlspecialchars($image['id']) . '" class="delete-btn">Delete</a>';
+          echo '<a href="delete-gallery.php?id=' . htmlspecialchars($image['id']) . '" class="delete-btn">Archive</a>';
           echo '</td>';
           echo '</tr>';
       }

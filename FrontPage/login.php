@@ -15,7 +15,7 @@
     <div style="background-color: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
   <form class="login-form" id="login-form" method="post">
     <h2 class="form-title">Log In</h2>
-    <label for="email" style="display: block; margin-bottom: 5px;">Ema address</label>
+    <label for="email" style="display: block; margin-bottom: 5px;">Email address</label>
     <input name="username" type="text" id="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
     <label for="password" style="display: block; margin-bottom: 5px;">Password</label>
     <input name="password" type="password" id="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">

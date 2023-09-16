@@ -58,3 +58,37 @@
     </div>
 </body>
 </html>
+<script>
+  const imageUrlFetchURL = 'controller/homeCarousel.php';
+
+// DOM element for the hero section
+const heroSection = document.querySelector('.hero-section');
+
+// Function to update the background image of the hero section
+function updateBackgroundImage(imageUrls) {
+    let currentIndex = 0;
+
+    setInterval(() => {
+        // Change the background image../public/image/Gallery_20230530165523.jpg
+        heroSection.style.backgroundImage = `url(../public/image/${imageUrls[currentIndex]})`;
+      alert(heroSection.style.backgroundImage);
+        // Increment the index, and loop back to the beginning if needed
+        currentIndex = (currentIndex + 1) % imageUrls.length;
+    }, 5000); // Change image every 5 seconds
+}
+
+// Fetch image URLs using AJAX
+fetch(imageUrlFetchURL)
+    .then((response) => response.json())
+    .then((data) => {
+        // Check if there are image URLs
+        if (data.length > 0) {
+            updateBackgroundImage(data);
+        } else {
+            console.error('No image URLs found in the database.');
+        }
+    })
+    .catch((error) => {
+        console.error('Error fetching image URLs:', error);
+    });
+    </script>

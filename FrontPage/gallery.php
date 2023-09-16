@@ -12,7 +12,7 @@
     include '../db.php';
 
     // Make a SQL query to the database
-    $sql = "SELECT image_url FROM gallery";
+    $sql = "SELECT image_url FROM gallery where active = 1";
     $result = $conn->query($sql);
 
     // If the query was successful

@@ -61,6 +61,7 @@
             <th>Incident Status</th>
             <th>Date Created</th>
             <th>Date Updated</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
         <?php
@@ -95,10 +96,12 @@
                 echo '<td>' . $incident_status . '</td>';
                 echo '<td>' . $date_created . '</td>';
                 echo '<td>' . $date_updated . '</td>';
+                
+                echo '<td>' . $row['active'] . '</td>';
                 echo '<td>';
                 echo '<a href="read-incident.php?id=' . $incident_id . '">Read</a>';
                 echo '<a href="update-incident.php?id=' . $incident_id . '">Edit</a>';
-                echo '<a href="delete-incident.php?id=' . $incident_id . '">Delete</a>';
+                echo '<a href="delete-incident.php?id=' . $incident_id . '">Archive</a>';
                 echo '</td>';
                 echo '</tr>';
             }

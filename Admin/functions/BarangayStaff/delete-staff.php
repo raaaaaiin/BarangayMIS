@@ -5,7 +5,7 @@
         $id = $_GET['id'];
         
         // Delete the staff record from the database
-        $query = "DELETE FROM barangay_staff WHERE id='$id'";
+        $query = "UPDATE barangay_staff SET active = 0 WHERE id='$id'";
         mysqli_query($conn, $query);
         mysqli_close($conn);
 

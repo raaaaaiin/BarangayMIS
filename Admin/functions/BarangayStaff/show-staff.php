@@ -77,6 +77,7 @@
         barangay_staff.position,
         barangay_staff.date_added,
         barangay_staff.date_updated,
+        barangay_staff.active,
         users.id,
         users.email,
         users.username,
@@ -116,6 +117,7 @@
                         <th>Position</th>
                         <th>Date Added</th>
                         <th>Date Updated</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -129,10 +131,11 @@
                         <td><?php echo $row['position']; ?></td>
                         <td><?php echo $row['date_added']; ?></td>
                         <td><?php echo $row['date_updated']; ?></td>
+                        <th><?php echo $row['active']; ?></th>
                         <td class="actions">
                             <div class="action-buttons">
                                 <a href="edit-staff.php?id=<?php echo $row['staffid']; ?>" class="edit">Edit</a>
-                                <a href="delete-staff.php?id=<?php echo $row['staffid']; ?>" class="delete">Delete</a>
+                                <a href="delete-staff.php?id=<?php echo $row['staffid']; ?>" class="delete">Archive</a>
                             </div>
                         </td>
                     </tr>

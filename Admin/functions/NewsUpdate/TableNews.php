@@ -103,7 +103,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete-confirm'])) {
        
         $id = $_POST['event-id'];
-        $sql = "DELETE FROM news_events WHERE id=$id";
+        $sql = "UPDATE news_events SET active = 0 WHERE id = $id";
        
         if ($conn->query($sql) === TRUE) {
             echo '<script>alert("Event deleted successfully.");</script>';
@@ -133,6 +133,7 @@
                 <th>Location</th>
                 <th>Date Created</th>
                 <th>Date Updated</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -158,9 +159,10 @@
                     echo '<td>' . $row['location'] . '</td>';
                     echo '<td>' . $row['date_created'] . '</td>';
                     echo '<td>' . $row['date_updated'] . '</td>';
+                    echo '<td>' . $row['active'] . '</td>';
                     echo '<td>';
                     echo '<a href="EditNews.php?id=' . $row['id'] . '" class="edit-btn">Edit</a>';
-                    echo '<button class="delete-btn" onclick="showConfirmationDialog(' . $row['id'] . ', \'' . $row['title'] . '\', \'' . $row['description'] . '\')">Delete</button>';
+                    echo '<button class="delete-btn" onclick="showConfirmationDialog(' . $row['id'] . ', \'' . $row['title'] . '\', \'' . $row['description'] . '\')">Archive</button>';
                     
                     echo '</td>';
                     echo '</tr>';

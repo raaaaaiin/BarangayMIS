@@ -9,7 +9,7 @@
     $id = $_GET['id'];
 
     // Prepare SQL statement to delete a record
-    $stmt = $conn->prepare("DELETE FROM gallery WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE gallery set active = 0 WHERE id = ?");
 
     // Bind the id to the prepare statement
     $stmt->bind_param("i", $id);

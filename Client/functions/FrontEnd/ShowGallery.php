@@ -64,7 +64,7 @@
   <?php
     include_once '../../../db.php';
 
-    $sql = "SELECT * FROM gallery ORDER BY upload_date DESC";
+    $sql = "SELECT * FROM gallery ORDER BY upload_date DESC  where active = 1";
     $result = $conn->query($sql);
 
     $gallery = [];
