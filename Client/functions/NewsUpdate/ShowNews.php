@@ -181,7 +181,15 @@
                     echo '<span class="author">' . $row['title'] . '</span>';
                     echo '</div>';
                     echo '<div class="content">';
-                    echo '<p>' . $row['description'] . '</p>';
+                    
+                    // Check if description is longer than 30 characters
+                    if (strlen($row['description']) > 160) {
+                        echo '<p class="short-description">' . substr($row['description'], 0, 160) . '... <a href="#" class="see-more">See More</a></p>';
+                        echo '<p class="full-description" style="display:none;">' . $row['description'] . ' <a href="#" class="see-less">See Less</a></p>';
+                    } else {
+                        echo '<p>' . $row['description'] . '</p>';
+                    }
+                    
                     echo '</div>';
                     echo '<img class="image" src="../../../Public/image/' . $row['image'] . '" alt="News Image">';
                     echo '<div class="footer">';
@@ -196,5 +204,28 @@
             ?>
         </div>
     </div>
+
+    <script>
+    // Add JavaScript to toggle "See More" and "See Less"
+    document.querySelectorAll('.see-more').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const shortDescription = this.parentElement;
+            const fullDescription = this.parentElement.nextElementSibling;
+            shortDescription.style.display = 'none';
+            fullDescription.style.display = 'block';
+        });
+    });
+
+    document.querySelectorAll('.see-less').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fullDescription = this.parentElement;
+            const shortDescription = this.parentElement.previousElementSibling;
+            shortDescription.style.display = 'block';
+            fullDescription.style.display = 'none';
+        });
+    });
+</script>
 </body>
 </html>

@@ -112,17 +112,17 @@
         }
     }
     ?>
-<h1>News and Update <a href="AddNews.php" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; position: relative;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-    </svg>
-</a></h1>
+    <h1>News and Update <a href="AddNews.php" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; position: relative;">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+    </a></h1>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <th>Description</th>
+                <th>Description <span class="eye-icon" id="toggle-description">See All</span></th>
                 <th>Image</th>
                 <th>Type</th>
                 <th>Date</th>
@@ -148,7 +148,15 @@
                     echo '<tr>';
                     echo '<td>' . $row['id'] . '</td>';
                     echo '<td>' . $row['title'] . '</td>';
-                    echo '<td>' . $row['description'] . '</td>';
+                    echo '<td>';
+                    // Check if description is longer than 30 characters
+                    if (strlen($row['description']) > 30) {
+                        echo '<span class="short-description">' . substr($row['description'], 0, 30) . '... <a href="#" class="see-more">See More</a></span>';
+                        echo '<span class="full-description" style="display:none;">' . $row['description'] . ' <a href="#" class="see-less">See Less</a></span>';
+                    } else {
+                        echo '<span class="full-description">' . $row['description'] . '</span>';
+                    }
+                    echo '</td>';
                     echo '<td>' . $row['image'] . '</td>';
                     echo '<td>' . $row['type'] . '</td>';
                     echo '<td>' . $row['date'] . '</td>';
@@ -163,7 +171,6 @@
                     echo '<td>';
                     echo '<a href="EditNews.php?id=' . $row['id'] . '" class="edit-btn">Edit</a>';
                     echo '<button class="delete-btn" onclick="showConfirmationDialog(' . $row['id'] . ', \'' . $row['title'] . '\', \'' . $row['description'] . '\')">Archive</button>';
-                    
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -189,28 +196,88 @@
     </div>
 
     <script>
-        var confirmationDialog = document.getElementById('confirmation-dialog');
-        var eventId = document.getElementById('event-ide');
-        var eventTitle = document.getElementById('event-title');
-        var eventDescription = document.getElementById('event-description');
+    var confirmationDialog = document.getElementById('confirmation-dialog');
+    var eventId = document.getElementById('event-ide');
+    var eventTitle = document.getElementById('event-title');
+    var eventDescription = document.getElementById('event-description');
 
-        function showConfirmationDialog(id, title, description) {
-            eventId.textContent = id;
-            eventTitle.textContent = title;
-            eventDescription.textContent = description;
-            confirmationDialog.style.display = 'flex';
-        }
+    function showConfirmationDialog(id, title, description) {
+        eventId.textContent = id;
+        eventTitle.textContent = title;
+        eventDescription.textContent = description;
+        confirmationDialog.style.display = 'flex';
+    }
 
-        function hideConfirmationDialog() {
-            confirmationDialog.style.display = 'none';
-        }
+    function hideConfirmationDialog() {
+        confirmationDialog.style.display = 'none';
+    }
 
-        function deleteEvent() {
-            document.getElementById('event-id').value = eventId.textContent;
-            document.getElementById('delete-form').submit();
-           
+    function deleteEvent() {
+        document.getElementById('event-id').value = eventId.textContent;
+        document.getElementById('delete-form').submit();
+    }
+
+    var descriptionToggled = false;
+    var toggleDescription = document.getElementById('toggle-description');
+    toggleDescription.addEventListener('click', toggleDescriptionClick);
+
+    function toggleDescriptionClick() {
+        var descriptions = document.querySelectorAll('.short-description, .full-description');
+        if (descriptionToggled) {
+            toggleDescription.textContent = 'See All';
+            descriptions.forEach(function (desc) {
+                desc.style.display = 'none';
+            });
+            document.querySelectorAll('.see-more').forEach(function (link) {
+                link.style.display = 'inline';
+            });
+        } else {
+            toggleDescription.textContent = '';
+            descriptions.forEach(function (desc) {
+                desc.style.display = 'inline';
+            });
+            document.querySelectorAll('.see-more').forEach(function (link) {
+                link.style.display = 'none';
+            });
         }
-    </script>
+        descriptionToggled = !descriptionToggled;
+    }
+
+    document.querySelectorAll('.see-more').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const shortDescription = this.parentElement;
+            const fullDescription = shortDescription.nextElementSibling;
+            shortDescription.style.display = 'none';
+            fullDescription.style.display = 'inline';
+        });
+    });
+
+    document.querySelectorAll('.see-less').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const fullDescription = this.parentElement;
+            const shortDescription = fullDescription.previousElementSibling;
+            fullDescription.style.display = 'none';
+            shortDescription.style.display = 'inline';
+            document.querySelectorAll('.see-more').forEach(function (link) {
+                link.style.display = 'inline'; // Add back "See More" links
+            });
+            toggleDescription.textContent = 'See All'; // Change button text back to "See All"
+            descriptionToggled = false;
+        });
+    });
+
+    // Hide "See More" initially if the description is not long enough
+    document.querySelectorAll('.short-description').forEach(function (shortDesc) {
+        const descriptionText = shortDesc.textContent;
+        if (descriptionText.length <= 30) {
+            shortDesc.querySelector('.see-more').style.display = 'none';
+        }
+    });
+</script>
+
+
 
     <form id="delete-form" method="POST" action="">
         <input type="hidden" name="event-id" id="event-id" value="">
