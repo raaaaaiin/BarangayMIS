@@ -12,7 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $password = mysqli_real_escape_string($conn, $_POST['password']);
 
   // Check if the username and password are valid
-  $query = "SELECT * FROM login_acc WHERE username = '$username' AND password = '$password'";
+  $query = "SELECT
+  login_acc.id,
+  login_acc.username,
+  login_acc.`password`,
+  login_acc.role,
+  login_acc.date_created,
+  login_acc.date_updated,
+  barangay_staff.position
+  FROM
+  login_acc
+  LEFT JOIN barangay_staff ON login_acc.id = barangay_staff.resident_id WHERE login_acc.username = '$username' AND login_acc.password = '$password'";
   $result = mysqli_query($conn, $query);
 
   if (mysqli_num_rows($result) == 1) {
@@ -21,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     // Store the role in session
     $_SESSION['role'] = $user['role'];
-    
+    $_SESSION['position'] = empty($user['position']) ? "Resident" : $user['position'];
+
     // Retrieve everything from 'users' where id matches the login_acc id
     $query = "SELECT * FROM users WHERE id = " . $user['id'];
     $result = mysqli_query($conn, $query);

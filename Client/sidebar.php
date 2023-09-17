@@ -100,7 +100,7 @@ require_once('../db.php');
             <img src="https://via.placeholder.com/75" alt="Profile Picture">
             <div>
                 <div class="profile-name"><?php echo $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'] ?></div>
-                <div class="profile-position">Resident</div>
+                <div class="profile-position"><?php  echo $_SESSION['position'] ?></div>
             </div>
         </div>
         
