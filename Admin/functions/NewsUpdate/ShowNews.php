@@ -15,8 +15,6 @@
         .container {
             display: flex;
             max-width: 1200px;
-            margin-top: 50px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar {
@@ -24,6 +22,14 @@
             background-color: #f2f2f2;
             padding: 20px;
             border-right: 1px solid #ccc;
+            transition: flex 0.3s ease-in-out;
+        }
+
+        .collapsed .sidebar {
+            width: 0px;
+            flex: 0 0 0;
+            padding: 0;
+            border: none;
         }
 
         .sidebar h3 {
@@ -79,7 +85,7 @@
         }
 
         .news .post {
-            max-width:800px;
+            max-width: 800px;
             margin-bottom: 20px;
             padding: 20px;
             border-radius: 4px;
@@ -127,12 +133,25 @@
             color: #007bff;
             text-decoration: none;
         }
+
+        /* Added a style for the "Toggle Sidebar" button */
+        #toggleSidebarButton {
+            top: 20px;
+            left: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
-    <div class="sidebar">
+    
+    <div class="container collapsed">
+        <div class="sidebar" id="sidebar">
             <h3>Sort By</h3>
             <div class="sorter">
                 <form method="GET" action="">
@@ -168,7 +187,12 @@
             </div>
         </div>
         <div class="news">
-            <h3>Latest News</h3>
+            <div style="align-items: center; display:flex"><button id="toggleSidebarButton" style="background: none; border: none; color: black;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M2 6h20M2 12h20M2 18h20"></path>
+    </svg>
+</button> <h3>Latest News </h3>
+            </div>
             <?php
             // Retrieve the news events data from the database
             $sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'date'; // Default sort option is date
@@ -183,7 +207,7 @@
                     echo '<span class="author">' . $row['title'] . '</span>';
                     echo '</div>';
                     echo '<div class="content">';
-                    
+
                     // Check if description is longer than 30 characters
                     if (strlen($row['description']) > 160) {
                         echo '<p class="short-description">' . substr($row['description'], 0, 160) . '... <a href="#" class="see-more">See More</a></p>';
@@ -191,7 +215,7 @@
                     } else {
                         echo '<p>' . $row['description'] . '</p>';
                     }
-                    
+
                     echo '</div>';
                     echo '<img class="image" src="../../../Public/image/' . $row['image'] . '" alt="News Image">';
                     echo '<div class="footer">';
@@ -208,26 +232,34 @@
     </div>
 
     <script>
-    // Add JavaScript to toggle "See More" and "See Less"
-    document.querySelectorAll('.see-more').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const shortDescription = this.parentElement;
-            const fullDescription = this.parentElement.nextElementSibling;
-            shortDescription.style.display = 'none';
-            fullDescription.style.display = 'block';
-        });
-    });
+        const sidebar = document.getElementById('sidebar');
+        const toggleSidebarButton = document.getElementById('toggleSidebarButton');
 
-    document.querySelectorAll('.see-less').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const fullDescription = this.parentElement;
-            const shortDescription = this.parentElement.previousElementSibling;
-            shortDescription.style.display = 'block';
-            fullDescription.style.display = 'none';
+        toggleSidebarButton.addEventListener('click', function() {
+            // Toggle the 'collapsed' class on the container
+            document.querySelector('.container').classList.toggle('collapsed');
         });
-    });
-</script>
+
+        // Add JavaScript to toggle "See More" and "See Less" (your existing code)
+        document.querySelectorAll('.see-more').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const shortDescription = this.parentElement;
+                const fullDescription = this.parentElement.nextElementSibling;
+                shortDescription.style.display = 'none';
+                fullDescription.style.display = 'block';
+            });
+        });
+
+        document.querySelectorAll('.see-less').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const fullDescription = this.parentElement;
+                const shortDescription = this.parentElement.previousElementSibling;
+                shortDescription.style.display = 'block';
+                fullDescription.style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
