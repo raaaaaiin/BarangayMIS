@@ -1,56 +1,54 @@
 <html>
     <head>
         <style>
-            table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 20px 0;
-}
+           table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-caption {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
-}
+        table thead {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-thead {
-  background-color: #f2f2f2;
-  text-align: left;
-}
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+        }
 
-th {
-  padding: 12px;
-  text-align: left;
-  font-weight: bold;
-  color: #555555;
-  border-bottom: 2px solid #ddd;
-}
+        table tbody tr:nth-child(even) {
+            background-color: #fff;
+        }
 
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+        table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
 
-td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
+        .action-buttons {
+            display: flex;
+            justify-content: flex-start;
+        }
 
-/* hover effect */
-tbody tr:hover {
-  background-color: #ddd;
-}
+        .edit-btn, .delete-btn {
+            display: inline-block;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #fff;
+            text-decoration: none;
+        }
 
-/* responsive design */
-@media only screen and (max-width: 600px) {
-  table {
-    font-size: 14px;
-  }
-  th, td {
-    padding: 8px;
-  }
-}
+        .edit-btn {
+            background-color: #007bff;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
             </style>
 </head>
 <body><table>

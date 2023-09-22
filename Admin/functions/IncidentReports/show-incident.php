@@ -16,30 +16,50 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        th {
+        table thead {
             background-color: #007bff;
             color: #fff;
+        }
+
+        table th,
+        table td {
             padding: 10px;
             text-align: left;
         }
 
-        td {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
+        table tbody tr:nth-child(even) {
+            background-color: #fff;
         }
 
-        td:last-child {
-            text-align: center;
+        table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
         }
 
-        a {
+        .action-buttons {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .edit-btn, .delete-btn {
+            display: inline-block;
+            padding: 5px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #fff;
             text-decoration: none;
-            color: #007bff;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
         }
     </style>
 </head>
@@ -50,6 +70,8 @@
     </svg>
 </a></h1>
     <table>
+        <thead>
+
         <tr>
             <th>Incident ID</th>
             <th>Resident ID</th>
@@ -64,6 +86,7 @@
             <th>Status</th>
             <th>Actions</th>
         </tr>
+    </thead>
         <?php
         // Include the database connection file
         include_once '../../../db.php';
@@ -99,9 +122,9 @@
                 
                 echo '<td>' . $row['active'] . '</td>';
                 echo '<td>';
-                echo '<a href="read-incident.php?id=' . $incident_id . '">Read</a>';
-                echo '<a href="update-incident.php?id=' . $incident_id . '">Edit</a>';
-                echo '<a href="delete-incident.php?id=' . $incident_id . '">Archive</a>';
+                echo '<a href="read-incident.php?id=' . $incident_id . '" class="edit-btn">Read</a>';
+                echo '<a href="update-incident.php?id=' . $incident_id . '" class="edit-btn">Edit</a>';
+                echo '<a href="delete-incident.php?id=' . $incident_id . '" class="delete-btn">Archive</a>';
                 echo '</td>';
                 echo '</tr>';
             }

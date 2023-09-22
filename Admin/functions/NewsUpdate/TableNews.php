@@ -14,48 +14,56 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
         }
 
         table thead {
-            background-color: #0066cc;
+            background-color: #007bff;
             color: #fff;
         }
 
-        table th, table td {
+        table th,
+        table td {
             padding: 10px;
             text-align: left;
         }
 
-        table th {
-            font-weight: bold;
+        table tbody tr:nth-child(even) {
+            background-color: #fff;
         }
 
-        table tbody tr {
-            border-bottom: 1px solid #ddd;
+        table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
         }
 
-        table tbody tr:last-child {
-            border-bottom: none;
+        .action-buttons {
+            display: flex;
+            justify-content: flex-start;
         }
 
         .edit-btn, .delete-btn {
-            padding: 5px 10px;
+            display: inline-block;
+            padding: 5px;
             border: none;
             border-radius: 4px;
+            margin-right: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
+            color: #fff;
+            text-decoration: none;
         }
 
         .edit-btn {
-            background-color: #0066cc;
-            color: #fff;
+            background-color: #007bff;
         }
 
         .delete-btn {
-            background-color: #cc0000;
-            color: #fff;
+            background-color: #dc3545;
         }
 
+
+        
+
+       
         .confirmation-dialog {
             display: none;
             position: fixed;
