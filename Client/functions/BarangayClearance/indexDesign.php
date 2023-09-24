@@ -2047,7 +2047,7 @@ width: 75%;
 height: 100%;
 left: 0;
 top: 0;
-background: #14aa6c;
+background: #1877f2;
 border-radius: 8px;
 }
 
@@ -2124,7 +2124,7 @@ color: #536387;
 color: #07074D;;
 }
 .frmbld-steps li.active span {
-background: #14aa6c;
+background: #1877f2;
 color: #FFFFFF;
 }
 
@@ -2149,7 +2149,7 @@ outline: none;
 resize: none;
 }
 .frmbld-form-input:focus {
-border-color: #14aa6c;
+border-color: #1877f2;
 box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
 .frmbld-form-label {
@@ -2195,7 +2195,7 @@ transition: all .3s ease-in-out;
 box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.12);
 }
 .frmbld-confirm-sniBut.active {
-background: #14aa6c;
+background: #1877f2;
 color: #FFFFFF;
 }
 
@@ -2239,7 +2239,7 @@ border-radius: 5px;
 padding: 10px 25px;
 border: none;
 font-weight: 500;
-background-color: #14aa6c;
+background-color: #1877f2;
 color: white;
 cursor: pointer;
 }
@@ -2276,7 +2276,7 @@ white-space: nowrap;
 will-change: box-shadow,transform;
 font-size: 18px; }
 .app{
-box-shadow: rgb(45 35 66 / 40%) 0 2px 4px, rgb(45 35 66 / 30%) 0 7px 13px -3px, #14aa6c 0 -3px 0 inset;
+box-shadow: rgb(45 35 66 / 40%) 0 2px 4px, rgb(45 35 66 / 30%) 0 7px 13px -3px, #1877f2 0 -3px 0 inset;
 }
 .rej{
 box-shadow: rgb(45 35 66 / 40%) 0 2px 4px, rgb(45 35 66 / 30%) 0 7px 13px -3px, #aa1414 0 -3px 0 inset;

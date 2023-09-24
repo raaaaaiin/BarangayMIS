@@ -1,10 +1,12 @@
 <?php
 session_start();
 include 'connection.php';
+
 $s1 = "";
 $s2 = "";
 $s3 = "";
 $data = array();
+
 if (isset($_POST['sub'])) {
     $var_forms = $_POST['forms'];
     if ($var_forms == "Barangay Clearance") {
@@ -20,23 +22,32 @@ if (isset($_POST['sub'])) {
     } else if ($var_forms == "Barangay ID") {
         $loc = "Location: Clearances/asd.php";
     }
-    $data = json_encode(array($data)); // assume $data is an empty array for now
+    $data = json_encode(array($data));
     $resid = $_POST["residentID"];
     $file = "blank";
     $link = $loc;
     $type = $var_forms;
     $issued_id = $_SESSION['id'];
     $created_at = date("Y-m-d H:i:s");
+
+    $signatureImageData = $_POST["signatureImageData"];
+    $signatureFilename = "signature_" . time() . ".png"; // Adjust the filename as needed
+    $signatureFilePath = "../../../Public/signatures/" . $signatureFilename; // Update with the actual path
+    
+    // Decode and save the signature image as a PNG file
+    $decodedImage = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureImageData));
+    file_put_contents($signatureFilePath, $decodedImage);
+    
+
+
     $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, file, link, type, status, created_at) 
            VALUES ('$resid', '$issued_id', '$data', '$file', '$link', '$type','pending','$created_at')";
-    // var_dump($sqlsli);
     mysqli_query($db, $sqlsli);
     header($loc . "&resId=$resid&created=$created_at");
 }
 ?>
 
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Forms and Clearances</title>
@@ -47,7 +58,6 @@ if (isset($_POST['sub'])) {
             background-color: #e7f3fe;
             border-left: 6px solid #2196F3;
         }
-
         <?php include_once 'indexDesign.php' ?>
     </style>
 
@@ -62,17 +72,44 @@ if (isset($_POST['sub'])) {
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
-        /* Modal Content */
+        canvas {
+            border-color: gainsboro;
+            border-width: 1px;
+            border-style: solid;
+        }
+
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
+            background-color: white;
+            margin: 20% auto;
+            max-width: 600px;
             border: 1px solid #888;
             width: 80%;
+        }
+
+        .modal-header {
+            background-color: #1877f2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+        }
+
+        /* Close button */
+        .close-button {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Signature pad container */
+        .signature-container {
+            text-align: center;
+            margin-top: 20px;
         }
 
         /* Close Button */
@@ -91,51 +128,13 @@ if (isset($_POST['sub'])) {
         }
     </style>
 </head>
-
 <body style="font-family: Roboto, sans-serif !important;">
 
-<script>
-    const imgs = {};
-    let childCounter = 0;
-
-    function addChild() {
-        childCounter++;
-        let newChild = document.createElement("div");
-        newChild.innerHTML = `
-      <div class="frmbld-input-flex">
-        <div class="frgp">
-          <label class="ctrl-label cls-2" for="child">
-            Children Name
-          </label>
-          <div class="cls-10">
-            <textarea id="child-${childCounter}" name="child[]" required="" class="form-ctrl" rows="1"></textarea>
-          </div>
-        </div>
-        <div class="frgp">
-          <label class="ctrl-label cls-2" for="firstchildage">Child Age</label>
-          <div class="cls-10">
-            <input type="text" id="firstchildage-${childCounter}" hidden="">
-            <textarea id="firstchildage-${childCounter}" name="firstchildage[]" required="" class="form-ctrl" rows="1"></textarea>
-          </div>
-        </div>
-      </div>
-    `;
-        document.querySelector(".add-children-section").appendChild(newChild);
-    }
-</script>
-
 <form action="index.php" method="post">
-    <div clas="wrpr" id="clearance">
+    <div class="wrpr" id="clearance">
         <div class="cnt-fld p-4">
             <div class="rw">
                 <div class="c-12 ">
-                    <style>
-                        .info {
-                            color: rgba(29, 33, 36, 0.76);
-                            background-color: #e7f3fe;
-                            border-left: 6px solid #2196F3;
-                        }
-                    </style>
                     <div class="clg-12 cmd-12">
                         <div class="frmbld-main-wrpr">
                             <div class="frmbld-form-wrpr">
@@ -196,7 +195,7 @@ if (isset($_POST['sub'])) {
                                     <button type="button" id="Signature" class="frmbld-sniBut">
                                         Signature
                                     </button>
-                                    <button type="submit" id="sub" name="sub" class="frmbld-sniBut">
+                                    <button type="submit" id="sub" name="sub" class="frmbld-sniBut" disabled>
                                         Submit
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g clip-path="url(#clip0_1675_1807)">
@@ -216,66 +215,121 @@ if (isset($_POST['sub'])) {
                 </div>
             </div>
         </div>
+        <input type="hidden" id="signatureImageData" name="signatureImageData" value="">
+
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Please Enter Signature
+                    
+                <span class="close-button" id="closeModal">&times;</span>
+                </div>
+                <div class="signature-container">
+                    <canvas id="signatureCanvas" width="500" height="350"></canvas>
+                    <div style="display:flex;margin:25px;justify-content: flex-end;">
+                        <input type="button" id="clearSignature" class="frmbld-sniBut" style="margin:15px; display: inline;" value="Clear Signature">
+                        <input type="button" id="saveSignature" class="frmbld-sniBut" style="margin:15px; display: inline;" value="Done">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
-
-<!-- Modal HTML -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" id="closeModal">&times;</span>
-        <p>Modal content goes here.</p>
-    </div>
-</div>
-
 <script>
-    const clearance = document.getElementById("clearance");
-    const searcharea = document.getElementById("searcharea");
-    const clearancepapers = document.getElementById("interchangev1");
-    const residd = document.getElementById("residentID");
+const clearance = document.getElementById("clearance");
+const searcharea = document.getElementById("searcharea");
+const clearancepapers = document.getElementById("interchangev1");
+const residd = document.getElementById("residentID");
+const signatureCanvas = document.getElementById("signatureCanvas");
+const ctx = signatureCanvas.getContext("2d");
+let isDrawing = false;
 
-    function selectResident(id, img) {
-        id = id;
-        fname = document.getElementById('fname' + id).getAttribute('value');
-        mname = document.getElementById("mname" + id).getAttribute('value');
-        lname = document.getElementById("lname" + id).getAttribute('value');
-        document.getElementById('change').innerHTML = "<img style='width:250px;height:250px;' src='data:image/jpg;charset=utf8;base64," + img + "'>";
-        residd.value = id;
-        val();
+function selectResident(id, img) {
+    id = id;
+    fname = document.getElementById('fname' + id).getAttribute('value');
+    mname = document.getElementById("mname" + id).getAttribute('value');
+    lname = document.getElementById("lname" + id).getAttribute('value');
+    document.getElementById('change').innerHTML = "<img style='width:250px;height:250px;' src='data:image/jpg;charset=utf8;base64," + img + "'>";
+    residd.value = id;
+    val();
+}
+
+function val() {
+    selected = document.getElementById("sel1").value;
+    if (selected === 'Barangay Clearance') {
+        clearancepapers.innerHTML = `<?php include 'Clearance_Tab/Clearance.php'?>`;
+    } else if (selected === 'Barangay Certificate of Indigency') {
+        clearancepapers.innerHTML = `<?php include 'Clearance_Tab/Indigency.php'?>`;
+    } else if (selected === 'Barangay ID') {
+        clearancepapers.innerHTML = `<?php include 'Clearance_Tab/BarangayID.php'?>`;
     }
+}
 
-    function val() {
-        selected = document.getElementById("sel1").value;
-        if (selected === 'Barangay Clearance') {
-            clearancepapers.innerHTML = `<?php include 'Clearance_Tab/Clearance.php'?>`;
-        } else if (selected === 'Barangay Certificate of Indigency') {
-            clearancepapers.innerHTML = `<?php include 'Clearance_Tab/Indigency.php'?>`;
-        } else if (selected === 'Barangay ID') {
-            clearancepapers.innerHTML = `<?php include 'Clearance_Tab/BarangayID.php'?>`;
-        }
+function change() {}
+val();
+
+// Modal JavaScript
+const modal = document.getElementById("myModal");
+const closeModal = document.getElementById("closeModal");
+const signatureButton = document.getElementById("Signature");
+const clearSignatureButton = document.getElementById("clearSignature");
+const saveSignatureButton = document.getElementById("saveSignature");
+const submitButton = document.getElementById("sub");
+
+
+signatureCanvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - signatureCanvas.getBoundingClientRect().left, e.clientY - signatureCanvas.getBoundingClientRect().top);
+});
+
+signatureCanvas.addEventListener("mousemove", (e) => {
+    if (!isDrawing) return;
+    ctx.lineTo(e.clientX - signatureCanvas.getBoundingClientRect().left, e.clientY - signatureCanvas.getBoundingClientRect().top);
+    ctx.stroke();
+});
+
+signatureCanvas.addEventListener("mouseup", () => {
+    isDrawing = false;
+    validateSignature();
+});
+
+function validateSignature() {
+    if (ctx.getImageData(0, 0, signatureCanvas.width, signatureCanvas.height).data.some((val) => val !== 0)) {
+        submitButton.disabled = false;
+    } else {
+        submitButton.disabled = true;
     }
+}
 
-    function change() {}
-    val()
+signatureButton.onclick = function () {
+    modal.style.display = "block";
+    ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+    submitButton.disabled = true;
+};
 
-    // Modal JavaScript
-    const modal = document.getElementById("myModal");
-    const closeModal = document.getElementById("closeModal");
-    const signatureButton = document.getElementById("Signature");
+closeModal.onclick = function () {
+    modal.style.display = "none";
+};
 
-    signatureButton.onclick = function () {
-        modal.style.display = "block";
-    }
-
-    closeModal.onclick = function () {
+window.onclick = function (event) {
+    if (event.target == modal) {
         modal.style.display = "none";
     }
+};
 
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+clearSignatureButton.addEventListener("click", () => {
+    ctx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+});
+
+saveSignatureButton.addEventListener("click", () => {
+    validateSignature();
+    const signatureImageData = signatureCanvas.toDataURL("image/png");
+    document.getElementById("signatureImageData").value = signatureImageData;
+
+    modal.style.display = "none";
+});
 </script>
 </body>
-
 </html>

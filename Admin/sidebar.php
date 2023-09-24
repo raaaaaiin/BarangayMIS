@@ -107,12 +107,13 @@ require_once('../db.php');
         <?php
         $adminFunctionsDir = 'functions/';
         $adminFunctions = [
-            'NewsUpdate' => [ 'ShowNews.php' => 'Home','TableNews.php' => 'News and Updates'],
+            'NewsUpdate' => [ 'ShowNews.php' => 'Home',
+            'TableNews.php' => 'News and Updates'],
             'BarangayStaff' => [ 'show-staff.php' => 'Barangay Staff'],
             'FrontEnd' => ['ShowGallery.php' => 'Gallery'],
             'IncidentReports' => ['show-incident.php' => 'Incident Report'],
-            
-            'Resident' => [ 'resident.php' => 'Residents'],
+            'ClearanceRequest' => ['show-request.php' => 'Clearances'],
+             'Resident' => [ 'resident.php' => 'Residents'],
             'BarangayClearance' => ['index.php' => 'Service']
         ];
         

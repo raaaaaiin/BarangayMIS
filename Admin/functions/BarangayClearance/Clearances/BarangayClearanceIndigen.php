@@ -48,13 +48,13 @@ include_once "OfficialsModel.php";
             doc.save('BarangayClearance.pdf');
             pdfData = doc.output('blob');
             const formData = new FormData();
-            // formData.append('pdfdata', pdfData);
-            // formData.append('Created_at', ' <?php //echo $_GET['created'] ?>');
-            // formData.append('Res_id', '<?php //echo  $_GET['resId']?>');
+            formData.append('pdfdata', pdfData);
+            formData.append('Created_at', ' <?php //echo $_GET['created'] ?>');
+            formData.append('Res_id', '<?php //echo  $_GET['resId']?>');
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Certificate Successfuly generated");
+                    alert(xhr.responseText);
                 }
             };
             xhr.open('POST', 'savepdf.php', true);
@@ -166,7 +166,7 @@ include_once "OfficialsModel.php";
     <div>
 
 <center>
-        <h3><a href="javascript:genPDF();" data-html2canvas-ignore="true">Download PDF</a>
+        <h3><a href="javascript:genPDF();" data-html2canvas-ignore="true">Approve Clearance</a>
             <h3>
 </center
 

@@ -172,7 +172,7 @@ $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, file, li
         }
 
         .mdl-header{
-            background: #14aa6c;
+            background: #1877f2;
             padding: 15px;
             color: #fff;
         }
