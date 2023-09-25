@@ -14,11 +14,21 @@ if (isset($_POST['sub'])) {
         $Addresss = $_POST["Addresss"];
         $Purpose = $_POST["Purpose"];
         $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'Purpose' => $Purpose
+        );
     } else if ($var_forms == "Barangay Certificate of Indigency") {
         $Grantedto = $_POST["Grantedto"];
         $Addresss = $_POST["Addresss"];
         $Purpose = $_POST["Purpose"];
         $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'Purpose' => $Purpose
+        );
     } else if ($var_forms == "Barangay ID") {
         $loc = "Location: Clearances/asd.php";
     }
@@ -31,7 +41,8 @@ if (isset($_POST['sub'])) {
     $created_at = date("Y-m-d H:i:s");
 
     $signatureImageData = $_POST["signatureImageData"];
-    $signatureFilename = "signature_" . time() . ".png"; // Adjust the filename as needed
+    $signatureFilenameOrig = "signature_" . time(); // Adjust the filename as needed
+    $signatureFilename = $signatureFilenameOrig . ".png"; // Adjust the filename as needed
     $signatureFilePath = "../../../Public/signatures/" . $signatureFilename; // Update with the actual path
     
     // Decode and save the signature image as a PNG file
@@ -40,10 +51,10 @@ if (isset($_POST['sub'])) {
     
 
 
-    $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, file, link, type, status, created_at) 
-           VALUES ('$resid', '$issued_id', '$data', '$file', '$link', '$type','pending','$created_at')";
+    $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, SIGNATURE , file, link, type, status, created_at) 
+           VALUES ('$resid', '$issued_id', '$data','$signatureFilename', '$file', '$link', '$type','pending','$created_at')";
     mysqli_query($db, $sqlsli);
-    header($loc . "&resId=$resid&created=$created_at");
+    header($loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig");
 }
 ?>
 

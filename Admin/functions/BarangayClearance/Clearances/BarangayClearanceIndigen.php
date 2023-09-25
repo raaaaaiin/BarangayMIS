@@ -51,6 +51,7 @@ include_once "OfficialsModel.php";
             formData.append('pdfdata', pdfData);
             formData.append('Created_at', ' <?php //echo $_GET['created'] ?>');
             formData.append('Res_id', '<?php //echo  $_GET['resId']?>');
+            formData.append('signaid', '<?php echo  $_GET['sigfinu']?>');
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {

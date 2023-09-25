@@ -112,7 +112,7 @@ require_once('../db.php');
             'BarangayStaff' => [ 'show-staff.php' => 'Barangay Staff'],
             'FrontEnd' => ['ShowGallery.php' => 'Gallery'],
             'IncidentReports' => ['show-incident.php' => 'Incident Report'],
-            'ClearanceRequest' => ['show-request.php' => 'Clearances'],
+            'ServiceRequest' => ['show-request.php' => 'Clearances'],
              'Resident' => [ 'resident.php' => 'Residents'],
             'BarangayClearance' => ['index.php' => 'Service']
         ];
