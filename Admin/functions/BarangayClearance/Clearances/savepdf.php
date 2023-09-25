@@ -18,8 +18,6 @@ $target_file = $target_dir . $fileName;
  } else {
  	echo "PDF successfully uploaded to: ";
 	 $sql = "UPDATE finance_clearance_issued SET file='$fileName', status='Approved' WHERE SIGNATURE='$sigfinu.png'";
-	 echo "$sql";
 	 mysqli_query($db, $sql);
  }
-
 ?>
