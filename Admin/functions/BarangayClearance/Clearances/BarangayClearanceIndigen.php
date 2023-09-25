@@ -77,6 +77,8 @@ include_once "OfficialsModel.php";
 </header>
 
 <body>
+        <h3><a href="javascript:genPDF();" data-html2canvas-ignore="true">Approve Clearance</a>
+            <h3>
 
 
     <div id="main-container">
@@ -166,10 +168,6 @@ include_once "OfficialsModel.php";
     </div>
     <div>
 
-<center>
-        <h3><a href="javascript:genPDF();" data-html2canvas-ignore="true">Approve Clearance</a>
-            <h3>
-</center
 
 </body>
 
