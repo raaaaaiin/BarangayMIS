@@ -9,33 +9,9 @@ $data = array();
 
 if (isset($_POST['sub'])) {
     $var_forms = $_POST['forms'];
-    if ($var_forms == "Barangay Clearance") {
-        $Grantedto = $_POST["Grantedto"];
-        $Addresss = $_POST["Addresss"];
-        $Purpose = $_POST["Purpose"];
-        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
-        $data = array(
-            'Grantedto' => $Grantedto,
-            'Addresss' => $Addresss,
-            'Purpose' => $Purpose
-        );
-    } else if ($var_forms == "Barangay Certificate of Indigency") {
-        $Grantedto = $_POST["Grantedto"];
-        $Addresss = $_POST["Addresss"];
-        $Purpose = $_POST["Purpose"];
-        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
-        $data = array(
-            'Grantedto' => $Grantedto,
-            'Addresss' => $Addresss,
-            'Purpose' => $Purpose
-        );
-    } else if ($var_forms == "Barangay ID") {
-        $loc = "Location: Clearances/asd.php";
-    }
-    $data = json_encode(array($data));
-    $resid = $_POST["residentID"];
+    $resid = $_POST["Grantedto"];
     $file = "blank";
-    $link = $loc;
+    
     $type = $var_forms;
     $issued_id = $_SESSION['id'];
     $created_at = date("Y-m-d H:i:s");
@@ -50,11 +26,40 @@ if (isset($_POST['sub'])) {
     file_put_contents($signatureFilePath, $decodedImage);
     
 
+    if ($var_forms == "Barangay Clearance") {
+        $Grantedto = $_POST["Grantedto"];
+        $Addresss = $_POST["Addresss"];
+        $Purpose = $_POST["Purpose"];
+        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'Purpose' => $Purpose,
+            'signatureFilename' => $signatureFilenameOrig
+        );
+    } else if ($var_forms == "Barangay Certificate of Indigency") {
+        $Grantedto = $_POST["Grantedto"];
+        $Addresss = $_POST["Addresss"];
+        $Purpose = $_POST["Purpose"];
+        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'signatureFilename' => $signatureFilenameOrig
+        );
+    } else if ($var_forms == "Barangay ID") {
+        $loc = "Location: Clearances/asd.php";
+    }
+    $data = json_encode(array($data));
+    
+    $link = $loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig";
+
 
     $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, SIGNATURE , file, link, type, status, created_at) 
            VALUES ('$resid', '$issued_id', '$data','$signatureFilename', '$file', '$link', '$type','pending','$created_at')";
     mysqli_query($db, $sqlsli);
-    header($loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig");
+    echo "<script>alert('Clearance Requested');</script>";
+    //header($loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig");
 }
 ?>
 
