@@ -66,20 +66,7 @@
   <?php
     include_once '../../../db.php';
 
-    $sql = "SELECT
-
-    finance_clearance_issued.id,
-    Concat(users.firstname,' ',
-    users.middlename,' ',
-    users.lastname) as Name,
-    finance_clearance_issued.SIGNATURE,
-    finance_clearance_issued.FILE,
-    finance_clearance_issued.`status`,
-    finance_clearance_issued.Created_at
-    FROM
-    finance_clearance_issued
-    INNER JOIN users ON finance_clearance_issued.Res_ID = users.id
-    ";
+    $sql = "SELECT * FROM `finance_clearance_issued`;";
     $result = $conn->query($sql);
 
     $gallery = [];
@@ -107,7 +94,7 @@
       <?php
       foreach ($gallery as $image) {
           echo '<tr>';
-         echo '<td>' . htmlspecialchars($image['Name']) . '</td>';
+         echo '<td>' . htmlspecialchars($image['Res_ID']) . '</td>';
          echo '<td><img src="' . $uploadDir . $image['SIGNATURE'] . '" width="100"></td>';
            
          echo '<td><a href="' . $pdfDir . htmlspecialchars($image['FILE']) . '">' . htmlspecialchars($image['FILE']) . '</a></td>';
@@ -115,7 +102,10 @@
           echo '<td>' . $image['status'] . '</td>';
           echo '<td class="actions">';
           //echo '<a href="edit-gallery.php?id=' . htmlspecialchars($image['id']) . '" class="edit-btn">Edit</a>';
+          
+          echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'" class="edit-btn">Approve</a>';
           echo '<a class="delete-btn">Archive</a>';
+          
           echo '</td>';
           echo '</tr>';
       }
