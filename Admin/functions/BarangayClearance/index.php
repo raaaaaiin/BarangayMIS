@@ -56,7 +56,7 @@ if (isset($_POST['sub'])) {
 
 
     $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, SIGNATURE , file, link, type, status, created_at) 
-           VALUES ('$resid', '$issued_id', '$data','$signatureFilename', '$file', '$link', '$type','pending','$created_at')";
+           VALUES ('$resid', '$issued_id', '$data','$signatureFilename', '$file', '$link', '$type','Pending','$created_at')";
     mysqli_query($db, $sqlsli);
     echo "<script>alert('Clearance Requested');</script>";
     //header($loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig");
@@ -99,7 +99,7 @@ if (isset($_POST['sub'])) {
 
         .modal-content {
             background-color: white;
-            margin: 20% auto;
+            margin: 10% auto;
             max-width: 600px;
             border: 1px solid #888;
             width: 80%;

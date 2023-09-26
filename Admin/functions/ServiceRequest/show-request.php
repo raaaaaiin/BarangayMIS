@@ -102,12 +102,12 @@
           echo '<td>' . $image['status'] . '</td>';
           echo '<td class="actions">';
           //echo '<a href="edit-gallery.php?id=' . htmlspecialchars($image['id']) . '" class="edit-btn">Edit</a>';
-          if( $image['status'] == "Approved"){
+          if( $image['status'] == "Received"){
             
           
-          }elseif($image['status'] == "pending"){
+          }elseif($image['status'] == "Pending"){
             echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'" class="edit-btn">Approve</a>';
-            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Archive</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
           }else{
             echo '<a class="delete-btn" href="reactivate_request.php?id='.$image['id'].'">Re activate</a>';
           }

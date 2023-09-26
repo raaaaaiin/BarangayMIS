@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
 $id = $_GET['id'];
 
 // Prepare SQL statement to update the status of a record
-$stmt = $conn->prepare("UPDATE finance_clearance_issued SET status = 'pending' WHERE id = ?");
+$stmt = $conn->prepare("UPDATE finance_clearance_issued SET status = 'Pending' WHERE id = ?");
 
 // Bind the id to the prepare statement
 $stmt->bind_param("i", $id);
