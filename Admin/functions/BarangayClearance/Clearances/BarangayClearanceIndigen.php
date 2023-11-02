@@ -56,6 +56,7 @@ include_once "OfficialsModel.php";
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     alert(xhr.responseText);
+                    window.location.href = "../../ServiceRequest/show-request.php";
                 }
             };
             xhr.open('POST', 'savepdf.php', true);
@@ -77,7 +78,18 @@ include_once "OfficialsModel.php";
 </header>
 
 <body>
-        <h3><a href="javascript:genPDF();" data-html2canvas-ignore="true">Approve Clearance</a>
+<style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+<div class="spinner-overlay">
+<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center;">
+  <div style="border: 4px solid rgba(255, 255, 255, 0.3);border-top: 4px solid #fbfeff;border-radius: 50%;width: 50px;height: 50px;animation: spin 2s linear infinite;"></div>
+</div>
+</div>
+        <h3><a href="javascript:genPDF();javascript:showSpinner();" data-html2canvas-ignore="true">Approve Clearance</a>
             <h3>
 
 
@@ -170,5 +182,14 @@ include_once "OfficialsModel.php";
 
 
 </body>
+<script>
+     function showSpinner() {
+    document.querySelector(".spinner-overlay").style.display = "flex";
+  }
 
+  function hideSpinner() {
+    document.querySelector(".spinner-overlay").style.display = "none";
+  }
+hideSpinner();
+    </script>
 </html>

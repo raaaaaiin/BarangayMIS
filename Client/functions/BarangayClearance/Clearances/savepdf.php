@@ -3,7 +3,7 @@ include_once '../connection.php';
 
 // $createdat = trim($_POST['Created_at']);
 // $resid = trim($_POST['Res_id']);
-$target_dir = $_SERVER['DOCUMENT_ROOT'] . '/BarangayMis/Public/certs_issued/';
+$target_dir = $_SERVER['DOCUMENT_ROOT'] . '/Public/certs_issued/';
 
 $fileName = date("Y_m_d_His") . rand(0,999999) . ".pdf";
 

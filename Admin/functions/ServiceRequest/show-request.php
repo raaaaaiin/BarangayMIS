@@ -107,7 +107,7 @@
 
           echo '<td>' . $image['status'] . '</td>';
           echo '<td class="actions">';
-          //echo '<a href="edit-gallery.php?id=' . htmlspecialchars($image['id']) . '" class="edit-btn">Edit</a>';
+          
           if( $image['status'] == "Received"){
             
           
