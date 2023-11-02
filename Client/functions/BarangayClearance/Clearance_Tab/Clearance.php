@@ -1,6 +1,6 @@
 
 <div class="frmbld-form-step-1 active">
-<div class="frgp">
+    <div class="frgp">
         <label class="ctrl-label cls-2" for="Grantedto">Name</label>
         <div class="cls-10">
             <input type="text" id="Grantedto" name="Grantedto" hidden="" value="<?php echo $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'] ?>">
@@ -16,57 +16,57 @@
     </div>
     <div class="frmbld-input-flex">
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Status</label>
+        <label class="ctrl-label cls-2" for="Status">Status</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Status" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div><div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Birthday</label>
+        <label class="ctrl-label cls-2" for="Birthday">Birthday</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Birthday" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
 </div>
 <div class="frmbld-input-flex">
 <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Age</label>
+        <label class="ctrl-label cls-2" for="Age">Age</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Age" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
 
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Birthplace</label>
+        <label class="ctrl-label cls-2" for="Birthplace">Birthplace</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Birthplace" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
 </div>
 <div class="frmbld-input-flex">
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Height</label>
+        <label class="ctrl-label cls-2" for="Height">Height</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Height" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Weight</label>
+        <label class="ctrl-label cls-2" for="Weight">Weight</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Weight" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
 </div>
 <div class="frmbld-input-flex">
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Contact</label>
+        <label class="ctrl-label cls-2" for="Contact">Contact</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Contact" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Purpose">Voter Precint ID</label>
+        <label class="ctrl-label cls-2" for="Voter">Voter Precint ID</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Purpose" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="Purpose" name="Voter" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
 </div>

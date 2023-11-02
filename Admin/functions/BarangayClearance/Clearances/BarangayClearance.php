@@ -133,7 +133,7 @@ include_once "OfficialsModel.php";
     padding-top:0px;
 ">
                 <div class="header tag1">
-                    BARANGAY CLEARANCE INDIGENCY
+                    BARANGAY CLEARANCE
                 </div>
 
                 <div id="par" style='font-family: Arial, Helvetica, sans-serif; font-size:16px;font-weight: 300;'>
@@ -145,7 +145,7 @@ include_once "OfficialsModel.php";
                 
 
 
-                  echo "&nbsp This is to certify that <strong>$Grantedto</strong>, $Age years old, $CivilStatus, with a postal address at $Addresss, is an INDIGENT and that he/she haqs visibly no money, property or means of livelihood sufficient and available for daily food, shelter and basic necessities for himself and his family.  <br><br>&nbsp This certification is being issued upon the request of <strong>$Grantedto</strong> for the <strong>purpose</strong> of $Purpose";
+                  echo "&nbsp This is to certify that <strong>$Grantedto</strong>, $Age years old, $CivilStatus, with a postal address at $Addresss, is a BONIFIDE RESIDENT of Barangay Sta. Cruz, Antipolo City, known to me, to have a good moral character and reputation in this community. Further certify that he/she is a peace loving and a law abiding citizen and has no derogatory record on file. <br><br>&nbsp This certification is being issued upon the request of <strong>$Grantedto</strong> for the <strong>purpose</strong> of $Purpose";
                   ?>
                     <br><br>&nbsp Issued this <span id="name-input"><?php echo $datedate?></span> at <span
                         id="name-input"><?php echo $head_brgy_Name." ".$citymun_disp.",".$province_disp;?></span>.

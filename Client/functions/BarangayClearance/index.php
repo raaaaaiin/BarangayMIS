@@ -11,15 +11,13 @@ if (isset($_POST['sub'])) {
         $Grantedto = $_POST["Grantedto"];
         $Addresss = $_POST["Addresss"];
         $Purpose = $_POST["Purpose"];
-        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $loc = "Location: Clearances/BarangayClearance.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
 
 }else if($var_forms=="Barangay Certificate of Indigency"){
     $Grantedto = $_POST["Grantedto"];
     $Addresss = $_POST["Addresss"];
     $Purpose = $_POST["Purpose"];
     $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
-}else if($var_forms=="Barangay ID"){
-    $loc = "Location: Clearances/asd.php";
 }
 $data = json_encode(array($data)); // assume $data is an empty array for now
 $resid = $_POST["residentID"];

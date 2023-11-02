@@ -135,6 +135,35 @@
     </a>
 </div>
 <br>
+<div class="container">
+  <style>
+   
+input[type=search] {
+  border: none;
+  background: transparent;
+  margin: 0;
+  padding: 7px 8px;
+  font-size: 14px;
+  color: inherit;
+  border: 1px solid transparent;
+  border-radius: inherit;
+}
+
+input[type=search]::placeholder {
+  color: #bbb;
+}
+
+
+input.nosubmit {
+  border: 1px solid #555;
+  width: 100%;
+  padding: 9px 4px 9px 40px;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+}
+    </style>
+  <input class="nosubmit" type="search" placeholder="Search...">
+</div>
+<br>
     <table>
         <thead>
             <tr>
@@ -305,5 +334,35 @@
         <input type="hidden" name="delete-confirm" value="1">
     </form>
 </div>
-</body>
+</body><script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get the search input element and the table
+    const searchInput = document.querySelector('.nosubmit');
+    const table = document.querySelector('table');
+
+    searchInput.addEventListener('input', function () {
+      const searchText = searchInput.value.toLowerCase();
+      const rows = table.querySelectorAll('tbody tr');
+
+      rows.forEach((row) => {
+        const cells = row.querySelectorAll('td');
+        let match = false;
+
+        cells.forEach((cell) => {
+          const cellText = cell.textContent.toLowerCase();
+
+          if (cellText.includes(searchText)) {
+            match = true;
+          }
+        });
+
+        if (match) {
+          row.style.display = 'table-row';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 </html>

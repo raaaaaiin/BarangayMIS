@@ -30,7 +30,7 @@ if (isset($_POST['sub'])) {
         $Grantedto = $_POST["Grantedto"];
         $Addresss = $_POST["Addresss"];
         $Purpose = $_POST["Purpose"];
-        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $loc = "Location: Clearances/BarangayClearance.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
         $data = array(
             'Grantedto' => $Grantedto,
             'Addresss' => $Addresss,
@@ -167,7 +167,7 @@ if (isset($_POST['sub'])) {
                                         <select class="form-ctrl" required id="sel1" name="forms" onchange="val()">
                                             <option name="forms" value="<?php echo 'Barangay Certificate of Indigency' ?>"><?php echo 'Barangay Certificate of Indigency' ?></option>
                                             <option name="forms" value="<?php echo 'Barangay Clearance' ?>"><?php echo 'Barangay Clearance'; ?> </option>
-                                            <option name="forms" value="<?php echo 'Barangay ID'; ?>"><?php echo 'Barangay ID'; ?></option>
+                                            <!--<option name="forms" value="<?php echo 'Barangay ID'; ?>"><?php echo 'Barangay ID'; ?></option>-->
                                         </select>
                                     </div>
                                 </div>

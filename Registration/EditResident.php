@@ -3,11 +3,11 @@ session_start();
 
 // Check if the user is logged in and has the 'role' set to 'admin' in the session
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-    // User is an admin, allow access with the provided $_GET['id'] or set it to $_SESSION['id']
-    $get_id = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id'];
-} elseif (isset($_SESSION['id']) && isset($_SESSION['id'])) {
+    // User is an admin, allow access with the provided $_GET['id']
+    $get_id = isset($_GET['id']) ? $_GET['id'] : null;
+} elseif (isset($_SESSION['id']) && isset($_SESSION['id']['id'])) {
     // User is not an admin, and 'id' is set in the session
-    $session_id = $_SESSION['id'];
+    $session_id = $_SESSION['id']['id'];
 
     if (isset($_GET['id']) && $_GET['id'] === $session_id) {
         // User is not an admin, and $_GET['id'] matches the session 'id'
@@ -23,9 +23,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
     // For this example, I'll set $get_id to null
     $get_id = null;
 }
-
-// Now, $get_id contains the validated 'id' (either from $_GET or $_SESSION)
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,9 +39,9 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
   <div class="container mt-5">
   <?php
   
-    if (isset($get_id)) {
-      $id = $get_id;
-      include_once("../../../db.php");
+    if (isset($_GET['id'])) {
+      $id = $_GET['id'];
+      include('../db.php');
       $conn = new mysqli($servername, $username, $password, $dbname);
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -71,7 +68,6 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
         FROM users
         INNER JOIN login_acc ON login_acc.username = users.username AND login_acc.password = users.password
         WHERE users.id = $id";
-        
       $result = $conn->query($query);
       if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -154,6 +150,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
         WHERE id = $id";
 
       if ($conn->query($updateQuery) === TRUE) {
+        echo "Record updated successfully";
       } else {
         echo "Error updating record: " . $conn->error;
       }
@@ -165,7 +162,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
       <div class="col-md-8">
         <div class="card">
           <div class="card-header text-center">
-            <h3>Update Information Form</h3>
+            <h3>Registration Form</h3>
           </div>
           <div class="card-body">
             <form action="#" method="post">
@@ -255,7 +252,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
                 <input type="password" class="form-control" name="login_password" id="login_password" value="<?= $login_password ?>" placeholder="Password">
               </div>
               <div class="text-center">
-                <button type="submit" onclick="updateStatus()" class="btn btn-primary">Update Profile</button>
+                <button type="submit" class="btn btn-primary">Update Profile</button>
               </div>
             </form>
           </div>
@@ -264,9 +261,5 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
     </div>
   </div>
   </body>
-<script>
-  function updateStatus(){
-    alert("Record updated successfully, Please Re-log in to apply changes!");
-  }
-  </script>
+
 </html>

@@ -113,7 +113,7 @@ require_once('../db.php');
             'FrontEnd' => ['ShowGallery.php' => 'Gallery'],
             'IncidentReports' => ['show-incident.php' => 'Incident Report'],
             'ServiceRequest' => ['show-request.php' => 'Clearances'],
-             'Resident' => [ 'resident.php' => 'Residents'],
+             'Resident' => [ 'resident.php' => 'Residents','EditResident.php' => 'Profile'],
             'BarangayClearance' => ['index.php' => 'Service']
         ];
         

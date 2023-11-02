@@ -113,7 +113,8 @@ require_once('../db.php');
             'IncidentReports' => ['show-incident.php' => 'Incident Report'],
     
             
-            'BarangayClearance' => ['index.php' => 'Service']
+            'ServiceRequest' => ['indexController.php' => 'Service'],
+            'Resident' => [ 'EditResident.php' => 'Profile']
         ];
         
         foreach ($adminFunctions as $folder => $files) {
