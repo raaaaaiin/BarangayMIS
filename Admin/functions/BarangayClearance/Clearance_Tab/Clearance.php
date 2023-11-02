@@ -1,12 +1,16 @@
 
 <div class="frmbld-form-step-1 active">
-    <div class="frgp">
-        <label class="ctrl-label cls-2" for="Grantedto">Name</label>
-        <div class="cls-10">
-            <input type="text" id="Grantedto" name="Grantedto" hidden="">
-            <textarea id="GrantedtoTA" name="Grantedto" required="" class="form-ctrl" rows="1"></textarea>
-        </div>
+<div class="frgp">
+    <label class="ctrl-label cls-2" for="Grantedto">Name</label>
+    <div class="cls-10">
+        <select id="Grantedto" name="Grantedto" required class="form-ctrl">
+            <option value="">Select a Name</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <!-- Add more options as needed -->
+        </select>
     </div>
+</div>
     <div class="frgp">
         <label class="ctrl-label cls-2" for="Addresss">Addresss</label>
         <div class="cls-10">

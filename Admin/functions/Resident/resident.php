@@ -51,24 +51,21 @@
         }
             </style>
 </head>
-<body><table>
-  <caption>Resident Information</caption>
+<body style="font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f2f2f2;">
+<div style="
+    border-radius: 25px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.2);
+">
+<h1>Resident Information</h1><table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Username</th>
-      <th>Password</th>
-      <th>First Name</th>
-      <th>Middle Name</th>
-      <th>Last Name</th>
-      <th>House Number</th>
-      <th>Street</th>
-      <th>Barangay</th>
-      <th>City/Municipality</th>
-      <th>Province</th>
-      <th>Zip Code</th>
-      <th>Phone Number</th>
+      <th>Fullname</th>
+      <th>Address</th>
       <th>Date of Birth</th>
       <th>Gender</th>
       <th>Occupation</th>
@@ -84,20 +81,8 @@
       if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
           echo "<tr>";
-          echo "<td>" . $row["id"] . "</td>";
-          echo "<td>" . $row["email"] . "</td>";
-          echo "<td>" . $row["username"] . "</td>";
-          echo "<td>" . $row["password"] . "</td>";
-          echo "<td>" . $row["firstname"] . "</td>";
-          echo "<td>" . $row["middlename"] . "</td>";
-          echo "<td>" . $row["lastname"] . "</td>";
-          echo "<td>" . $row["housenumber"] . "</td>";
-          echo "<td>" . $row["street"] . "</td>";
-          echo "<td>" . $row["barangay"] . "</td>";
-          echo "<td>" . $row["city"] . "</td>";
-          echo "<td>" . $row["state"] . "</td>";
-          echo "<td>" . $row["zip"] . "</td>";
-          echo "<td>" . $row["phone"] . "</td>";
+          echo "<td>" . $row["firstname"] ." " .  $row["middlename"] ." " . $row["lastname"] . "</td>";
+          echo "<td>" . $row["housenumber"] ." " .  $row["street"] ." " . $row["barangay"] ." " .  $row["city"] ." " . $row["state"] ." " . $row["zip"] . "</td>";
           echo "<td>" . $row["dob"] . "</td>";
           echo "<td>" . $row["gender"] . "</td>";
           echo "<td>" . $row["occupation"] . "</td>";
@@ -111,5 +96,6 @@
     ?>
   </tbody>
 </table>
+    </div>
     </body>
     </head>

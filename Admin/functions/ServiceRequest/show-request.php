@@ -79,6 +79,12 @@
     
     $pdfDir = "../../../public/certs_issued/";
   ?>
+  <div class="container" style="
+    border-radius: 25px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.2);
+">
  <h1 class="text-2xl font-bold mb-3">Transaction View</h1>
   <table>
     <thead>
@@ -118,5 +124,6 @@
       ?>
     </tbody>
   </table>
+    </div>
 </body>
 </html>

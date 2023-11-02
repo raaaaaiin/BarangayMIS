@@ -120,6 +120,12 @@
         }
     }
     ?>
+    <div style="
+    border-radius: 25px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.2);
+">
     <h1>News and Update <a href="AddNews.php" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; position: relative;">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -139,8 +145,6 @@
                 <th>Contact Person</th>
                 <th>Organizer</th>
                 <th>Location</th>
-                <th>Date Created</th>
-                <th>Date Updated</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -173,8 +177,6 @@
                     echo '<td>' . $row['contact_person'] . '</td>';
                     echo '<td>' . $row['organizer'] . '</td>';
                     echo '<td>' . $row['location'] . '</td>';
-                    echo '<td>' . $row['date_created'] . '</td>';
-                    echo '<td>' . $row['date_updated'] . '</td>';
                     echo '<td>' . $row['active'] . '</td>';
                     echo '<td>';
                     echo '<a href="EditNews.php?id=' . $row['id'] . '" class="edit-btn">Edit</a>';
@@ -291,5 +293,6 @@
         <input type="hidden" name="event-id" id="event-id" value="">
         <input type="hidden" name="delete-confirm" value="1">
     </form>
+</div>
 </body>
 </html>

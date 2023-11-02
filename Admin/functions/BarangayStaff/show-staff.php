@@ -103,7 +103,12 @@
 
     if (mysqli_num_rows($result) > 0) {
         ?>
-        <div class="container">
+        <div class="container" style="
+    border-radius: 25px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.2);
+">
         <h1 class="text-2xl font-bold mb-3">Barangay Staff <a href="create-staff.php" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; position: relative;">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>

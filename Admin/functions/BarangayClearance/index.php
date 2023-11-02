@@ -152,8 +152,14 @@ if (isset($_POST['sub'])) {
             <div class="rw">
                 <div class="c-12 ">
                     <div class="clg-12 cmd-12">
+                        
                         <div class="frmbld-main-wrpr">
-                            <div class="frmbld-form-wrpr">
+                            <div class="frmbld-form-wrpr" style="border-radius: 25px;
+    padding: 25px;
+    background-color: white;
+    box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.2);" >
+    
+    <h1>Clearance Creation</h1>
                                 <input id="residentID" name="residentID" value="" hidden>
                                 <div class="frgp">
                                     <label class="ctrl-label cls-2" for="Category">Category</label>

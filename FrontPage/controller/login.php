@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       
       // Store user info in session
       $_SESSION['user_info'] = $user_info;
-      
+      $_SESSION['id'] = $user['id'];
       echo $user['role'];
     } else {
       echo 'No user found with given id';
