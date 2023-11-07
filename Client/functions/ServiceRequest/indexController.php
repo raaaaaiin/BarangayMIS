@@ -1,3 +1,100 @@
+<?php
+session_start();
+include "../../../db.php";
+$s1 = "";
+$s2 = "";
+$s3 = "";
+$data = array();
+
+    
+
+    
+$dob = $_SESSION["user_info"]["dob"];
+    $birthdate = new DateTime($dob);
+    $currentDate = new DateTime();
+    $age = $currentDate->diff($birthdate)->y;
+if (isset($_POST['sub'])) {
+    $signatureImageData = $_FILES["signatureImageData"];
+    $signatureFilenameOrig = "signature_" . time();
+    $signatureFilename = $signatureFilenameOrig . ".png";
+    $signatureFilePath = "../../../Public/signatures/" . $signatureFilename;
+    
+    if ($signatureImageData["error"] === UPLOAD_ERR_OK) {
+        // Move the uploaded image to the desired location
+        if (move_uploaded_file($signatureImageData["tmp_name"], $signatureFilePath)) {
+            // File upload and move succeeded
+            // You can add additional actions here if needed
+        } else {
+            // File move failed
+            // Handle the error as needed
+        }
+    } else {
+        // File upload failed
+        // Handle the error as needed
+    }
+
+    $var_forms = $_POST['purposecert'];
+    $resid = $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'];
+    $file = "blank";
+    
+    $type = $var_forms;
+    $issued_id = $_SESSION['id'];
+    $created_at = date("Y-m-d H:i:s");
+    if ($_POST["purposepick"] == "Other") {
+        $Purpose = $_POST["otherPurpose"];
+    } else {
+        $Purpose = $_POST["purposepick"];
+    }
+    if ($var_forms == "Barangay Clearance") {
+        $Grantedto = $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'];
+        $Addresss = $_SESSION["user_info"]["housenumber"] . ", " . $_SESSION["user_info"]["street"] . ", " . $_SESSION["user_info"]["barangay"] . ", " . $_SESSION["user_info"]["city"] . ", " . $_SESSION["user_info"]["state"] . ", " . $_SESSION["user_info"]["zip"];
+       
+        $loc = "Location: Clearances/BarangayClearance.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'Purpose' => $Purpose
+        );
+    } else if ($var_forms == "Barangay Certificate of Indigency") {
+        $Grantedto = $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'];
+        $Addresss = $_SESSION["user_info"]["housenumber"] . ", " . $_SESSION["user_info"]["street"] . ", " . $_SESSION["user_info"]["barangay"] . ", " . $_SESSION["user_info"]["city"] . ", " . $_SESSION["user_info"]["state"] . ", " . $_SESSION["user_info"]["zip"];
+     
+        $loc = "Location: Clearances/BarangayClearanceIndigen.php?Grantedto=$Grantedto&Addresss=$Addresss&Purpose=$Purpose";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'Purpose' => $Purpose
+        );
+    }else if ($var_forms == "Barangay ID") {
+        $Grantedto = $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'];
+        $Addresss = $_SESSION["user_info"]["housenumber"] . ", " . $_SESSION["user_info"]["street"] . ", " . $_SESSION["user_info"]["barangay"] . ", " . $_SESSION["user_info"]["city"] . ", " . $_SESSION["user_info"]["state"] . ", " . $_SESSION["user_info"]["zip"];
+     
+        $loc = "Location: Clearances/BarangayID.php?id=$issued_id";
+        $data = array(
+            'Grantedto' => $Grantedto,
+            'Addresss' => $Addresss,
+            'Purpose' => $Purpose
+        );
+    }
+    
+    /*$dob = $_SESSION["user_info"]["dob"];
+    $birthdate = new DateTime($dob);
+    $currentDate = new DateTime();
+    $age = $currentDate->diff($birthdate)->y;*/
+    
+    $data = json_encode(array($data));
+    
+    $link = $loc . "&resId=$resid&created=$created_at&dob=$age&signifu=$signatureFilenameOrig";
+
+    $sqlsli = "INSERT INTO finance_clearance_issued(SIGNATURE,res_id, issue_id, data, file, link, type, status, created_at) 
+           VALUES ('$signatureFilename','$resid', '$issued_id', '$data', '$file', '$link', '$type','Pending','$created_at')";
+    mysqli_query($conn, $sqlsli);
+    echo "<script>alert('Clearance Requested Please wait for SMS for confirmation ');</script>";
+}
+
+?>
+
+
 <html class="no-js" lang="en-GB"><head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -131,7 +228,7 @@
         }
 
         .mdl-header{
-            background: #14aa6c;
+            background: #1877f2;
             padding: 15px;
             color: #fff;
         }
@@ -168,7 +265,7 @@
         }
         .button--purple {
             color: #fff;
-            background: #14aa6c;
+            background: #1877f2;
             transition: all .5s ease;
             box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
         }
@@ -190,47 +287,62 @@
     <div class="mdl-content">
         <div class="mdl-header">
             <span class="closeBtn" onclick="Modalhide()">✖</span>
-            <h2 style="color:white">Appointment approval</h2>
-        </div><form style="margin:25px" onsubmit="setdate(); return false;">
-        <center><div style="display:flex;flex-direction: column;align-content: space-between;align-items: center;height:100%;width:75%;margin:0px">
-
-
-                    <div style="width:75%;display:flex;justify-content: space-between;align-items: center;"><span style="font-size:2em">Time:</span><input id="timepick" class="kyotie" name="timepick" type="time" value="" required="">
-
-<script>
-document.getElementById("timepick").addEventListener("change", function() {
-  var time = this.value;
-  var minTime = "09:00";
-  var maxTime = "17:00";
+            <h2 style="color:white">Cert approval</h2>
+        </div><form style="margin: 25px" method="post" action="" enctype="multipart/form-data">
   
-  if (time < minTime || time > maxTime) {
-    alert("Please select a time between 9 AM and 5 PM");
-    this.value = "";
-  }
-});
-</script></div>
-                    <div style="width:75%;display:flex;justify-content: space-between;align-items: center;"><span style="font-size:2em">Date:</span><input id="datepick" class="kyotie" name="datepick" type="date" value="" required="" onchange="disableSunday(this)">
+        <center><div style="display:flex;flex-direction: column;align-content: space-between;align-items: center;flex-direction: column;width:75%;margin:0px">
+        <span style="font-size:2em">Proof of residency</span>
+        <input type="file" name="signatureImageData" accept="image/*">
+
+                    
+                    <div style="width:75%;display:flex;justify-content: space-between;align-items: center;flex-direction: column;"><span style="font-size:2em">Purpose:</span><select id="purposepick" class="kyotie" name="purposepick" required>
+    <option value="" disabled selected>Select Purpose</option>
+    <option value="Applying for government assistance">Applying for government assistance</option>
+    <option value="Employment requirements">Employment requirements</option>
+    <option value="School enrollment">School enrollment</option>
+    <option value="Legal documentation">Legal documentation</option>
+    <option value="Residence verification">Residence verification</option>
+    <option value="Income verification">Income verification</option>
+    <option value="Scholarship application">Scholarship application</option>
+    <option value="Travel or visa application">Travel or visa application</option>
+    <option value="Public housing application">Public housing application</option>
+    <option value="Social welfare program enrollment">Social welfare program enrollment</option>
+    <option value="Medical assistance">Medical assistance</option>
+    <option value="Bank account opening">Bank account opening</option>
+    <option value="Other">Other</option>
+</select>
+<br>
+<div id="otherPurposeField" style="display: none;">
+<span style="font-size:2em">Specify purpose</span>
+    <input class="kyotie" type="text" id="otherPurpose" name="otherPurpose">
+</div>
 
 <script>
-function disableSunday(element) {
-  var date = new Date(element.value);
-  if (date.getDay() === 0) {
-    alert("Sunday is disabled");
-    element.value = "";
-  }
-}
-</script></div>
-                    <div style="width:75%;display:flex;justify-content: space-between;align-items: center;"><span style="font-size:2em">Purpose:</span><input id="purposepick" class="kyotie" name="purposepick" value="" required=""></div>
+    var purposePick = document.getElementById('purposepick');
+    var otherPurposeField = document.getElementById('otherPurposeField');
+    var otherPurposeInput = document.getElementById('otherPurpose');
+
+    purposePick.addEventListener('change', function () {
+        if (purposePick.value === 'Other') {
+            otherPurposeField.style.display = 'block';
+            otherPurposeInput.setAttribute('required', 'required');
+        } else {
+            otherPurposeField.style.display = 'none';
+            otherPurposeInput.removeAttribute('required');
+        }
+    });
+</script>
+</div>
 
 
-            <input id="purposecert" name="" value="" hidden=""><br>
+            <input id="purposecert" name="purposecert" value="" hidden><br>
 
 
-            <input type="submit" name="submitter" class="button app btn__large button--purple" value="Confirm">
+            <input type="submit" id="sub" name="sub"  class="button app btn__large button--purple" value="Confirm">
 
         </div></center>
         </form>
-        <div class="mdl-footer"><span style="color:gray;float:right;">San Isidro MIS</span><br>
+        <div class="mdl-footer"><span style="color:gray;float:right;">Sitio Igiban Services</span><br>
 
 
 
@@ -238,7 +350,7 @@ function disableSunday(element) {
     </div>
 </div>
 <div class="grid" style="
-    height: 535px;
+    height: 600px;
 ">
     
 
@@ -257,7 +369,7 @@ function disableSunday(element) {
                 <div class="card__content">
                     <h1 class="card__header">Request Good Moral</h1>
                     <p class="card__text">A Certificate of Good Moral Character is an official document that attests to an individual's reputation, behavior, and ethical conduct. It is typically issued by a relevant authority, such as an educational institution, employer, or government agency, and serves to verify that the person has exhibited responsible and ethical behavior. </p>
-                    <button class="card__btn">Barangay Clearance Good Moral</button>
+                    <button class="card__btn">Barangay Clearance</button>
                 </div>
             </div>
         </div>
@@ -310,7 +422,7 @@ function disableSunday(element) {
                 <div class="card__content">
                     <h1 class="card__header">Request Indigency Form</h1>
                     <p class="card__text">A Certificate of Indigence is provided to disadvantaged residents who wish to access support, including scholarships, medical services, free legal aid from the Public Attorney's Office (PAO), and similar assistance. Issuing Office or Department: Municipal Social Welfare and Development.</p>
-                    <button class="card__btn">Barangay Certificate Indigency</button>
+                    <button class="card__btn">Barangay Certificate of Indigency</button>
                 </div>
             </div>
         </div>
@@ -332,7 +444,15 @@ function disableSunday(element) {
 
 
         
-
+        <div class="grid__item">
+            <div class="card"><img class="card__img" src="https://www.shutterstock.com/image-vector/id-cards-personal-info-data-260nw-1931221970.jpg" alt="Snowy Mountains">
+                <div class="card__content">
+                    <h1 class="card__header">Request Barangay ID</h1>
+                    <p class="card__text">A Barangay ID, also known as a Barangay Identification Card or simply a Barangay ID card, is an identification card issued to residents of a barangay in the Philippines. </p>
+                    <button class="card__btn">Barangay ID</button>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -393,8 +513,8 @@ function disableSunday(element) {
 
     // Open mdl
     function openModal(){
-        alert("Clearance requested! Wait for a text message. (Under construction)")
 
+        mdl.style.display = 'block';
     }
 
     // Close mdl

@@ -4,6 +4,7 @@ include_once '../connection.php';
 // $createdat = trim($_POST['Created_at']);
 // $resid = trim($_POST['Res_id']);
 $sigfinu = trim($_POST['signaid']);
+$certid = $_POST['certids'];
 $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/Public/certs_issued/';
 
 $fileName = date("Y_m_d_His") . rand(0,999999) . ".pdf";
@@ -17,7 +18,7 @@ $target_file = $target_dir . $fileName;
 
  } else {
  	echo "Clearance has been successfully approved! ";
-	 $sql = "UPDATE finance_clearance_issued SET file='$fileName', status='Received' WHERE SIGNATURE='$sigfinu.png'";
+	 $sql = "UPDATE finance_clearance_issued SET file='$fileName', status='Approved' WHERE id='$certid'";
 	 mysqli_query($db, $sql);
  }
 ?>

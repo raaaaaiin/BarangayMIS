@@ -52,6 +52,8 @@ include_once "OfficialsModel.php";
             formData.append('Created_at', ' <?php //echo $_GET['created'] ?>');
             formData.append('Res_id', '<?php //echo  $_GET['resId']?>');
             formData.append('signaid', '<?php echo  $_GET['sigfinu']?>');
+            formData.append('certids', '<?php echo  $_GET['certid']?>');
+           
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -139,13 +141,14 @@ include_once "OfficialsModel.php";
                 <div id="par" style='font-family: Arial, Helvetica, sans-serif; font-size:16px;font-weight: 300;'>
                     TO WHOM IT MAY CONCERN:<br><br>
                     <?php
-                
-                $Age = "21";
+                 
+
+                $Age = $_GET['dob'];
                 $CivilStatus = "single";
                 
 
 
-                  echo "&nbsp This is to certify that <strong>$Grantedto</strong>, $Age years old, $CivilStatus, with a postal address at $Addresss, is a BONIFIDE RESIDENT of Barangay Sta. Cruz, Antipolo City, known to me, to have a good moral character and reputation in this community. Further certify that he/she is a peace loving and a law abiding citizen and has no derogatory record on file. <br><br>&nbsp This certification is being issued upon the request of <strong>$Grantedto</strong> for the <strong>purpose</strong> of $Purpose";
+                  echo "&nbsp This is to certify that <strong>$Grantedto</strong>, $Age years old, $CivilStatus, with a postal address at $Addresss, is a BONIFIDE RESIDENT of Barangay Sta. Cruz, Antipolo City, known to me, to have a good moral character and reputation in this community. Further certify that he/she is a peace loving and a law abiding citizen and has no derogatory record on file. <br><br>&nbsp This certification is being issued upon the request of <strong>$Grantedto</strong> for the <strong>purpose</strong> of <strong>$Purpose</strong>";
                   ?>
                     <br><br>&nbsp Issued this <span id="name-input"><?php echo $datedate?></span> at <span
                         id="name-input"><?php echo $head_brgy_Name." ".$citymun_disp.",".$province_disp;?></span>.

@@ -4,6 +4,7 @@ include 'connection.php';
 $s1="";
 $s2="";
 $s3="";
+$birthdate = $_POST['Birthday'];
  $data = array();
 if (isset($_POST['sub'])) {
             $var_forms = $_POST['forms'];

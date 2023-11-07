@@ -66,7 +66,7 @@
   <?php
     include_once '../../../db.php';
 
-    $sql = "SELECT * FROM `finance_clearance_issued`;";
+    $sql = "SELECT * FROM `finance_clearance_issued` order by id desc;";
     $result = $conn->query($sql);
 
     $gallery = [];
@@ -131,8 +131,11 @@ input.nosubmit {
       foreach ($gallery as $image) {
           echo '<tr>';
          echo '<td>' . htmlspecialchars($image['Res_ID']) . '</td>';
-         echo '<td><img src="' . $uploadDir . $image['SIGNATURE'] . '" width="100"></td>';
-           
+         if (!empty($image['SIGNATURE'])) {
+          echo '<td><img src="' . $uploadDir . $image['SIGNATURE'] . '" width="100"></td>';
+      } else {
+          echo '<td>Registered Account</td>';
+      }
          echo '<td><a href="' . $pdfDir . htmlspecialchars($image['FILE']) . '">' . htmlspecialchars($image['FILE']) . '</a></td>';
          echo '<td>' . $image['TYPE'] . '</td>';
           echo '<td>' . $image['status'] . '</td>';
@@ -142,8 +145,12 @@ input.nosubmit {
           if( $image['status'] == "Received"){
             
           
-          }elseif($image['status'] == "Pending"){
-            echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'" class="edit-btn">Approve</a>';
+          }elseif($image['status'] == "Approved"){
+            echo '<a class="edit-btn" href="received-request.php?id='.$image['id'].'">Received</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }
+          elseif($image['status'] == "Pending"){
+            echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'&certid='.$image['id'].'" class="edit-btn">Approve</a>';
             echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
           }else{
             echo '<a class="delete-btn" href="reactivate_request.php?id='.$image['id'].'">Re activate</a>';

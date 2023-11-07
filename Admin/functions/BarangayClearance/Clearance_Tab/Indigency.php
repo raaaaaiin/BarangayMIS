@@ -22,10 +22,7 @@
         </div>
     </div><div class="frgp">
         <label class="ctrl-label cls-2" for="Birthday">Birthday</label>
-        <div class="cls-10">
-            <textarea id="Purpose" name="Birthday" required="" class="form-ctrl" rows="1"></textarea>
-        </div>
-    </div>
+        <input type="date" id="Birthday" name="Birthday" required class="form-ctrl"></div>
 </div>
 <div class="frmbld-input-flex">
 <div class="frgp">
@@ -42,20 +39,7 @@
         </div>
     </div>
 </div>
-<div class="frmbld-input-flex">
-    <div class="frgp">
-        <label class="ctrl-label cls-2" for="Height">Height</label>
-        <div class="cls-10">
-            <textarea id="Purpose" name="Height" required="" class="form-ctrl" rows="1"></textarea>
-        </div>
-    </div>
-    <div class="frgp">
-        <label class="ctrl-label cls-2" for="Weight">Weight</label>
-        <div class="cls-10">
-            <textarea id="Purpose" name="Weight" required="" class="form-ctrl" rows="1"></textarea>
-        </div>
-    </div>
-</div>
+
 <div class="frmbld-input-flex">
     <div class="frgp">
         <label class="ctrl-label cls-2" for="Contact">Contact</label>

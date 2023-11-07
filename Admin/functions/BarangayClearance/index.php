@@ -51,8 +51,13 @@ if (isset($_POST['sub'])) {
         $loc = "Location: Clearances/asd.php";
     }
     $data = json_encode(array($data));
-    
-    $link = $loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig";
+    $dob = $_POST['Birthday'];
+$birthdate = new DateTime($dob);
+$currentDate = new DateTime();
+$age = $currentDate->diff($birthdate)->y;
+
+    $dob = $age;
+    $link = $loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig&dob=$dob";
 
 
     $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, SIGNATURE , file, link, type, status, created_at) 
