@@ -85,10 +85,18 @@ if (isset($_POST['sub'])) {
     $data = json_encode(array($data));
     
     $link = $loc . "&resId=$resid&created=$created_at&dob=$age&signifu=$signatureFilenameOrig";
-
+    $sqlsms = "INSERT INTO sms_messages (phone_number, message_content, send_date, active_status)
+    SELECT phone AS phone_number, 
+           'Your certificate request is processed. Expect our SMS confirmation soon\n\nYours truly, Sitio Igiban Services, Antipolo City.' AS message_content, 
+           CURRENT_TIMESTAMP AS send_date, 
+           0 AS active_status
+    FROM users
+    WHERE id = '$issued_id';";
+    
     $sqlsli = "INSERT INTO finance_clearance_issued(SIGNATURE,res_id, issue_id, data, file, link, type, status, created_at) 
            VALUES ('$signatureFilename','$resid', '$issued_id', '$data', '$file', '$link', '$type','Pending','$created_at')";
     mysqli_query($conn, $sqlsli);
+    mysqli_query($conn, $sqlsms);
     echo "<script>alert('Clearance Requested Please wait for SMS for confirmation ');</script>";
 }
 

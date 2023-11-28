@@ -123,7 +123,20 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }
+      $content = "We noticed that your data has been recently changed. If you haven\'t made this change, please contact us immediately.";
 
+      $insertQuery = "INSERT INTO sms_messages (phone_number, message_content, send_date, sent_date, active_status)
+      VALUES ('$updatedPhone', '$content', NOW(), NULL, 0);
+      ";
+      $messconti = "Check your details at our website, Your security is important to us.\n\nThank you, Sitio Igiban Barangay Sta. Cruz Antipolo City";
+
+      $insertQuery2 = "INSERT INTO sms_messages (phone_number, message_content, send_date, sent_date, active_status)
+      VALUES ('$updatedPhone', '$messconti', NOW(), NULL, 0);
+      ";
+      
+      mysqli_query($conn, $insertQuery);
+      
+      mysqli_query($conn, $insertQuery2);
       $updateQuery = "UPDATE users SET
         email = '$updatedEmail',
         firstname = '$updatedFirstname',

@@ -119,7 +119,11 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }
-
+      $content = "Hilukapo?";
+$insertQuery = "INSERT INTO sms_messages (phone_number, message_content, send_date, sent_date, active_status)
+VALUES ('$updatedPhone', '$content', NOW(), NULL, 0);
+";
+mysqli_query($conn, $insertQuery);
       $updateQuery = "UPDATE users SET
         email = '$updatedEmail',
         firstname = '$updatedFirstname',

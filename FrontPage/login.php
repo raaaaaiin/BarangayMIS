@@ -19,7 +19,7 @@
     <input name="username" type="text" id="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
     <label for="password" style="display: block; margin-bottom: 5px;">Password</label>
     <input name="password" type="password" id="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
-    <a href="#" class="forgot-password" style="display: block; text-align: right; margin-bottom: 10px;">Forgot password?</a>
+    <a href="forgetpass.php" class="forgot-password" style="display: block; text-align: right; margin-bottom: 10px;">Forgot password?</a>
     <button type="submit" class="login-button" >Log In</button>
   </form>
   <div id="result" class="result"></div>
