@@ -35,7 +35,7 @@ if (isset($_POST['sub'])) {
 
     $var_forms = $_POST['purposecert'];
     $resid = $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'];
-    $file = "blank";
+    $file = "No Remarks Yet.";
     
     $type = $var_forms;
     $issued_id = $_SESSION['id'];
@@ -87,14 +87,17 @@ if (isset($_POST['sub'])) {
     $link = $loc . "&resId=$resid&created=$created_at&dob=$age&signifu=$signatureFilenameOrig";
     $sqlsms = "INSERT INTO sms_messages (phone_number, message_content, send_date, active_status)
     SELECT phone AS phone_number, 
-           'Your certificate request is processed. Expect our SMS confirmation soon\n\nYours truly, Sitio Igiban Services, Antipolo City.' AS message_content, 
+           'Your Certificate request is processed. Expect our SMS confirmation soon\n\nYours truly, Sitio Igiban Services, Antipolo City.' AS message_content, 
            CURRENT_TIMESTAMP AS send_date, 
            0 AS active_status
     FROM users
     WHERE id = '$issued_id';";
     
-    $sqlsli = "INSERT INTO finance_clearance_issued(SIGNATURE,res_id, issue_id, data, file, link, type, status, created_at) 
-           VALUES ('$signatureFilename','$resid', '$issued_id', '$data', '$file', '$link', '$type','Pending','$created_at')";
+    $sqlsli = "INSERT INTO finance_clearance_issued(phone, SIGNATURE, res_id, issue_id, data, file, link, type, status, created_at) 
+           SELECT phone AS phone_number, '$signatureFilename', '$resid', '$issued_id', '$data', '$file', '$link', '$type', 'Pending', '$created_at'
+           FROM users
+           WHERE id = '$issued_id'";
+
     mysqli_query($conn, $sqlsli);
     mysqli_query($conn, $sqlsms);
     echo "<script>alert('Clearance Requested Please wait for SMS for confirmation ');</script>";

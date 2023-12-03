@@ -96,15 +96,15 @@ array_push($data, $Grantedto, $Addresss, $Purpose);
 }
 $data = json_encode(array($data)); // assume $data is an empty array for now
 $resid = $_POST["residentID"];
-$file = "blank";
+$file = "No Remarks Yet.";
 $link = $loc;
 $type = $var_forms;
 $issued_id = $_SESSION['id'];
 $created_at = date("Y-m-d H:i:s");
-$sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, file, link, type, status, created_at) 
-           VALUES ('$resid', '$issued_id', '$data', '$file', '$link', '$type','pending','$created_at')";
-        // var_dump($sqlsli);
-       mysqli_query($db, $sqlsli);
+$phone = $_POST["phone"];
+$sqlsli = "INSERT INTO finance_clearance_issued(phone,SIGNATURE,res_id, issue_id, data, file, link, type, status, created_at) 
+           VALUES ('$phone','$signatureFilename','$resid', '$issued_id', '$data', '$file', '$link', '$type','Pending','$created_at')";
+              mysqli_query($db, $sqlsli);
        header($loc."&resId=$resid&created=$created_at");
 
 

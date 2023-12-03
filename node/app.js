@@ -19,14 +19,12 @@ let options = {
     parity: 'none',
     rtscts: false,
     xon: true,
-    xoff: true,
-    xany: true,
+    xoff: false,
+    xany: false,
     autoDeleteOnReceive: true,
     enableConcatenation: true,
-    incomingCallIndication: true,
-    incomingSMSIndication: true,
     pin: '',
-    customInitCommand: 'AT+CMGS=120',
+    customInitCommand: '',
     cnmiCommand: 'AT+CNMI=2,1,0,2,1',
     logger: console
 };
@@ -76,7 +74,7 @@ function sendUnsentMessages() {
             modem.sendSMS(
                 phoneNumber,
                 messageContent,
-                true, // Set as true for the whole message
+                false, // Set as true for the whole message
                 response => {
                     console.log(response);
 

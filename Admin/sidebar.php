@@ -100,21 +100,22 @@ require_once('../db.php');
            <!--<img src="https://via.placeholder.com/75" alt="Profile Picture">-->
             <div>
                 <div class="profile-name"><?php echo $_SESSION['user_info']['lastname'] . " " . $_SESSION['user_info']['firstname'] . " " . $_SESSION['user_info']['middlename'] ?></div>
-                <div class="profile-position">Position</div>
+                <div class="profile-position"><?php  echo $_SESSION['position'] ?></div>
             </div>
         </div>
         
         <?php
         $adminFunctionsDir = 'functions/';
         $adminFunctions = [
-            'NewsUpdate' => [ 'ShowNews.php' => 'Home',
+            'NewsUpdate' => [ 'ShowNews.php' => 'Dashboard',
             'TableNews.php' => 'News and Updates'],
             'BarangayStaff' => [ 'show-staff.php' => 'Barangay Staff'],
             'FrontEnd' => ['ShowGallery.php' => 'Gallery'],
             'IncidentReports' => ['show-incident.php' => 'Incident Report'],
-            'ServiceRequest' => ['show-request.php' => 'Clearances'],
-             'Resident' => [ 'resident.php' => 'Residents','EditResident.php' => 'Profile'],
-            'BarangayClearance' => ['index.php' => 'Service']
+            'BarangayClearance' => ['index.php' => 'Certificate Creator'],
+            'ServiceRequest' => ['show-request.php' => 'Certificate Processing'],
+             'Resident' => [ 'resident.php' => 'Residents','EditResident.php' => 'Profile']
+            
         ];
         
         foreach ($adminFunctions as $folder => $files) {

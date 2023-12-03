@@ -14,104 +14,32 @@
       <h2>News and Updates!</h2>
     </div>
   </div>
-  <div class="main-content">
-    <div class="left-column">
-      <img src="../public/image/News.jpg" alt="Large image">
-      <div class="small-images">
-        <img src="../public/image/news1.jpg" alt="Small image 1">
-        <img src="../public/image/news2.jpg" alt="Small image 2">
-        <img src="../public/image/news3.jpg" alt="Small image 3">
-      </div>
-    </div>
-    <div class="right-column">
-      <h3>City Veterinary Office</h3>
-      <p>Narito po ang schedule ng City Veterinary Office sa mga natitirang araw sa buwan ng September para sa anti-rabies vaccine caravan..</p>
-      <h4>schedule</h4>
-      <ul>
-<li>September 13 
-    <ul>
-    <li>Sitio Kapihan, Brgy. Mambugan</li>
-    <li>Sitio Sangley/Nation, Brgy. Mambugan</li>
-    </ul>
-</li>
-<li>September 14 
-    <ul>
-    <li>Sitio Tabing Ilog, Brgy. San Isidro</li>
-    </ul>
-</li>
-<li>September 15 
-    <ul>
-    <li>Sitio Labangan, Brgy. Mambugan</li>
-    <li>Sitio Kasoy 2, Bgy. Mambugan</li>
-    </ul>
-</li>
-<li>September 16 
-    <ul>
-    <li>Sitio Tanglaw, Brgy. San Isidro</li>
-    </ul>
-</li>
-<li>September 17 
-    <ul>
-    <li>Sitio Cavite/Lourdes, Brgy. Mambugan</li>
-    <li>Soriano Compound, Brgy. Mambugan</li>
-    <li>Marco & Palomar Compound, Brgy. Mambugan</li>
-    <li>Crestwood Subd., Brgy. San Luis</li>
-    </ul>
-</li>
-<li>September 27, 2021 
-    <ul>
-    <li>Sitio Pulong Banal, Brgy. San Jose</li>
-    </ul>
-</li>
-<li>September 28, 2021 
-    <ul>
-    <li>Sitio Bagong Purok, Brgy. San Jose</li>
-    </ul>
-</li>
-</ul>
-    </div>
-  </div>
+ 
   <div class="categories">
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
-    <div class="category-card">
-      <img src="https://via.placeholder.com/100x500" alt="Category image">
-      <h5>Category Title</h5>
-      <p>Short description</p>
-    </div>
+   <?php
+include('../db.php'); // Include your database connection file
+$sortOption = isset($_GET['sort']) ? $_GET['sort'] : 'date'; // Default sort option is date
+$sql = "SELECT * FROM news_events ORDER BY $sortOption DESC";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="category-card">';
+        echo '<img src="../../../Public/image/' . $row['image'] . '" alt="Category image">';
+        echo '<h5>' . $row['title'] . '</h5>';
+        
+        // Check if description is longer than 160 characters
+        if (strlen($row['description']) > 160) {
+            echo '<p>' . substr($row['description'], 0, 160) . '...</p>';
+        } else {
+            echo '<p>' . $row['description'] . '</p>';
+        }
+
+        echo '</div>';
+    }
+} else {
+    echo '<p>No news events found.</p>';
+}
+?>
     <!-- Repeat category-card div for multiple cards -->
   </div>
 </body>

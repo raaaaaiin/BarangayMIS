@@ -148,8 +148,71 @@
     </style>
 </head>
 
-<body>
+<body style="justify-content: center;
+    flex-direction: column;">
+<?php
+// Include the database connection file
+include_once '../../../db.php';
+
+// Function to get the count for a specific status
+function getStatusCount($conn, $status) {
+    $sql = "SELECT COUNT(*) AS count FROM `finance_clearance_issued` WHERE status='$status'";
+    $result = $conn->query($sql);
     
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['count'];
+    } else {
+        return 0;
+    }
+}
+
+// Get counts for different statuses
+$pendingCount = getStatusCount($conn, 'Pending');
+$approvedCount = getStatusCount($conn, 'Approved');
+$receivedCount = getStatusCount($conn, 'Received');
+$deniedCount = getStatusCount($conn, 'Denied');
+
+// Get count for "Resident" from the 'users' table
+$residentQuery = "SELECT COUNT(*) AS count FROM `users`";
+$residentResult = $conn->query($residentQuery);
+
+if ($residentResult && $residentResult->num_rows > 0) {
+    $residentRow = $residentResult->fetch_assoc();
+    $residentCount = $residentRow['count'];
+} else {
+    $residentCount = 0;
+}
+?><div style="display:flex;justify-content: space-around;">
+
+<div style="background-color: #ffffff;width:200px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-bottom: 10px; color: #333333; font-size: 24px; font-weight: bold;">Pending Certs</h3>
+    <p style="margin: 0; color: #555555; font-size: 36px; font-weight: bold;"><?php echo $pendingCount; ?></p>
+</div>
+
+<div style="background-color: #ffffff;width:200px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-bottom: 10px; color: #333333; font-size: 24px; font-weight: bold;">Approved Certs</h3>
+    <p style="margin: 0; color: #555555; font-size: 36px; font-weight: bold;"><?php echo $approvedCount; ?></p>
+</div>
+
+<div style="background-color: #ffffff;width:200px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-bottom: 10px; color: #333333; font-size: 24px; font-weight: bold;">Received Certs</h3>
+    <p style="margin: 0; color: #555555; font-size: 36px; font-weight: bold;"><?php echo $receivedCount; ?></p>
+</div>
+
+<div style="background-color: #ffffff;width:200px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-bottom: 10px; color: #333333; font-size: 24px; font-weight: bold;">Denied Certs</h3>
+    <p style="margin: 0; color: #555555; font-size: 36px; font-weight: bold;"><?php echo $deniedCount; ?></p>
+</div>
+
+<div style="background-color: #ffffff;width:200px; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <h3 style="margin-bottom: 10px; color: #333333; font-size: 24px; font-weight: bold;">Resident Count</h3>
+    <p style="margin: 0; color: #555555; font-size: 36px; font-weight: bold;"><?php echo $residentCount; ?></p>
+</div>
+
+</div>
+    <br>
+    <div style="display:flex;justify-content: space-around;">
     <div class="container collapsed">
         <div class="sidebar" id="sidebar">
             <h3>Sort By</h3>
@@ -261,5 +324,6 @@
             });
         });
     </script>
+    </div>
 </body>
 </html>

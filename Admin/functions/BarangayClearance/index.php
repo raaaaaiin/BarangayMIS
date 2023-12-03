@@ -10,7 +10,7 @@ $data = array();
 if (isset($_POST['sub'])) {
     $var_forms = $_POST['forms'];
     $resid = $_POST["Grantedto"];
-    $file = "blank";
+    $file = "No Remarks Yet.";
     
     $type = $var_forms;
     $issued_id = $_SESSION['id'];
@@ -60,9 +60,16 @@ $age = $currentDate->diff($birthdate)->y;
     $link = $loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig&dob=$dob";
 
 
-    $sqlsli = "INSERT INTO finance_clearance_issued(res_id, issue_id, data, SIGNATURE , file, link, type, status, created_at) 
-           VALUES ('$resid', '$issued_id', '$data','$signatureFilename', '$file', '$link', '$type','Pending','$created_at')";
-    mysqli_query($db, $sqlsli);
+    $phone = $_POST["phone"];
+$sqlsli = "INSERT INTO finance_clearance_issued(phone,SIGNATURE,res_id, issue_id, data, file, link, type, status, created_at) 
+           VALUES ('$phone','$signatureFilename','$resid', '$issued_id', '$data', '$file', '$link', '$type','Pending','$created_at')";
+        
+        $sqlsms = "INSERT INTO sms_messages (phone_number, message_content, send_date, active_status) 
+        VALUES ('$phone', 'Your Certificate request is processed. Expect our SMS confirmation soon\n\nYours truly, Sitio Igiban Services, Antipolo City.', CURRENT_TIMESTAMP, 0)";
+
+    
+    mysqli_query($db, $sqlsms);
+        mysqli_query($db, $sqlsli);
     echo "<script>alert('Clearance Requested');</script>";
     //header($loc . "&resId=$resid&created=$created_at&sigfinu=$signatureFilenameOrig");
 }
@@ -164,7 +171,8 @@ $age = $currentDate->diff($birthdate)->y;
     background-color: white;
     box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.2);" >
     
-    <h1>Clearance Creation</h1>
+    <h1>
+Sitio Igiban Request Form</h1>
                                 <input id="residentID" name="residentID" value="" hidden>
                                 <div class="frgp">
                                     <label class="ctrl-label cls-2" for="Category">Category</label>

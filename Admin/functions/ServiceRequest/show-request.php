@@ -63,22 +63,7 @@
   </style>
 </head>
 <body>
-  <?php
-    include_once '../../../db.php';
-
-    $sql = "SELECT * FROM `finance_clearance_issued` order by id desc;";
-    $result = $conn->query($sql);
-
-    $gallery = [];
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $gallery[] = $row;
-        }
-    }
-    $uploadDir = "../../../public/signatures/";
-    
-    $pdfDir = "../../../public/certs_issued/";
-  ?>
+  
   <div class="container" style="
     border-radius: 25px;
     padding: 25px;
@@ -113,8 +98,92 @@ input.nosubmit {
 }
     </style>
   <input class="nosubmit" type="search" placeholder="Search..."></div><br>
- 
-  <table>
+  <?php
+    include_once '../../../db.php';
+
+    $sql = "SELECT * FROM `finance_clearance_issued` where status='Pending' order by id desc;";
+    $result = $conn->query($sql);
+
+    $gallery = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $gallery[] = $row;
+        }
+    }
+    $uploadDir = "../../../public/signatures/";
+    
+    $pdfDir = "../../../public/certs_issued/";
+  ?>
+  <table id='table1'>
+    <thead>
+      <tr>
+      <th>Resident Name</th>
+        <th>Signature</th>
+        <th>File Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($gallery as $image) {
+          echo '<tr>';
+         echo '<td>' . htmlspecialchars($image['Res_ID']) . '</td>';
+         if (!empty($image['SIGNATURE'])) {
+          echo '<td><img src="' . $uploadDir . $image['SIGNATURE'] . '" width="100"></td>';
+      } else {
+          echo '<td>Registered Account</td>';
+      }
+      if (htmlspecialchars($image['FILE']) === 'No Remarks Yet.') {
+        echo '<td><p>' . htmlspecialchars($image['FILE']) . '</p></td>';
+    } else {
+        echo '<td><a href="' . $pdfDir . htmlspecialchars($image['FILE']) . '">' . htmlspecialchars($image['FILE']) . '</a></td>';
+    }
+    echo '<td>' . $image['TYPE'] . '</td>';
+          echo '<td>' . $image['status'] . '</td>';
+          echo '<td>' . $image['Created_at'] . '</td>';
+          echo '<td class="actions">';
+          
+          if( $image['status'] == "Received"){
+            
+          
+          }elseif($image['status'] == "Approved"){
+            echo '<a class="edit-btn" href="received-request.php?id='.$image['id'].'">Received</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }
+          elseif($image['status'] == "Pending"){
+            echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'&certid='.$image['id'].'" class="edit-btn">Approve</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }else{
+            echo '<a class="delete-btn" href="reactivate_request.php?id='.$image['id'].'">Re activate</a>';
+          }
+          
+          echo '</td>';
+          echo '</tr>';
+      }
+      ?>
+    </tbody>
+  </table>
+
+  <?php
+    include_once '../../../db.php';
+
+    $sql = "SELECT * FROM `finance_clearance_issued`  where status='Approved' order by id desc;";
+    $result = $conn->query($sql);
+
+    $gallery = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $gallery[] = $row;
+        }
+    }
+    $uploadDir = "../../../public/signatures/";
+    
+    $pdfDir = "../../../public/certs_issued/";
+  ?>
+  <table id='table2'>
     <thead>
       <tr>
       <th>Resident Name</th>
@@ -162,34 +231,172 @@ input.nosubmit {
       ?>
     </tbody>
   </table>
+
+
+  <?php
+    include_once '../../../db.php';
+
+  $sql = "SELECT * FROM `finance_clearance_issued` where status='Denied'  order by id desc;";
+    $result = $conn->query($sql);
+
+    $gallery = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $gallery[] = $row;
+        }
+    }
+    $uploadDir = "../../../public/signatures/";
+    
+    $pdfDir = "../../../public/certs_issued/";
+  ?>
+  <table id='table3'>
+    <thead>
+      <tr>
+      <th>Resident Name</th>
+        <th>Signature</th>
+        <th>File Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($gallery as $image) {
+          echo '<tr>';
+         echo '<td>' . htmlspecialchars($image['Res_ID']) . '</td>';
+         if (!empty($image['SIGNATURE'])) {
+          echo '<td><img src="' . $uploadDir . $image['SIGNATURE'] . '" width="100"></td>';
+      } else {
+          echo '<td>Registered Account</td>';
+      }
+         echo '<td><a href="' . $pdfDir . htmlspecialchars($image['FILE']) . '">' . htmlspecialchars($image['FILE']) . '</a></td>';
+         echo '<td>' . $image['TYPE'] . '</td>';
+          echo '<td>' . $image['status'] . '</td>';
+          echo '<td>' . $image['Created_at'] . '</td>';
+          echo '<td class="actions">';
+          
+          if( $image['status'] == "Received"){
+            
+          
+          }elseif($image['status'] == "Approved"){
+            echo '<a class="edit-btn" href="received-request.php?id='.$image['id'].'">Received</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }
+          elseif($image['status'] == "Pending"){
+            echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'&certid='.$image['id'].'" class="edit-btn">Approve</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }else{
+            echo '<a class="delete-btn" href="reactivate_request.php?id='.$image['id'].'">Re activate</a>';
+          }
+          
+          echo '</td>';
+          echo '</tr>';
+      }
+      ?>
+    </tbody>
+  </table>
+
+
+
+  <?php
+    include_once '../../../db.php';
+
+    $sql = "SELECT * FROM `finance_clearance_issued`  where status='Received' order by id desc;";
+    $result = $conn->query($sql);
+
+    $gallery = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $gallery[] = $row;
+        }
+    }
+    $uploadDir = "../../../public/signatures/";
+    
+    $pdfDir = "../../../public/certs_issued/";
+  ?>
+  <table id='table4'>
+    <thead>
+      <tr>
+      <th>Resident Name</th>
+        <th>Signature</th>
+        <th>File Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($gallery as $image) {
+          echo '<tr>';
+         echo '<td>' . htmlspecialchars($image['Res_ID']) . '</td>';
+         if (!empty($image['SIGNATURE'])) {
+          echo '<td><img src="' . $uploadDir . $image['SIGNATURE'] . '" width="100"></td>';
+      } else {
+          echo '<td>Registered Account</td>';
+      }
+         echo '<td><a href="' . $pdfDir . htmlspecialchars($image['FILE']) . '">' . htmlspecialchars($image['FILE']) . '</a></td>';
+         echo '<td>' . $image['TYPE'] . '</td>';
+          echo '<td>' . $image['status'] . '</td>';
+          echo '<td>' . $image['Created_at'] . '</td>';
+          echo '<td class="actions">';
+          
+          if( $image['status'] == "Received"){
+            
+          
+          }elseif($image['status'] == "Approved"){
+            echo '<a class="edit-btn" href="received-request.php?id='.$image['id'].'">Received</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }
+          elseif($image['status'] == "Pending"){
+            echo '<a href="../BarangayClearance/'.substr(strstr($image['LINK'], ' '), 1).'&certid='.$image['id'].'" class="edit-btn">Approve</a>';
+            echo '<a class="delete-btn" href="delete-request.php?id='.$image['id'].'">Reject</a>';
+          }else{
+            echo '<a class="delete-btn" href="reactivate_request.php?id='.$image['id'].'">Re activate</a>';
+          }
+          
+          echo '</td>';
+          echo '</tr>';
+      }
+      ?>
+    </tbody>
+  </table>
+  
     </div>
-</body> <script>
+</body> 
+<script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Get the search input element and the table
     const searchInput = document.querySelector('.nosubmit');
-    const table = document.querySelector('table');
+
+    const tables = document.querySelectorAll('table[id^="table"]'); // Select all tables with IDs starting with "table"
 
     searchInput.addEventListener('input', function () {
       const searchText = searchInput.value.toLowerCase();
-      const rows = table.querySelectorAll('tbody tr');
 
-      rows.forEach((row) => {
-        const cells = row.querySelectorAll('td');
-        let match = false;
+      tables.forEach((table) => {
+        const rows = table.querySelectorAll('tbody tr');
 
-        cells.forEach((cell) => {
-          const cellText = cell.textContent.toLowerCase();
+        rows.forEach((row) => {
+          const cells = row.querySelectorAll('td');
+          let match = false;
 
-          if (cellText.includes(searchText)) {
-            match = true;
+          cells.forEach((cell) => {
+            const cellText = cell.textContent.toLowerCase();
+
+            if (cellText.includes(searchText)) {
+              match = true;
+            }
+          });
+
+          if (match) {
+            row.style.display = 'table-row';
+          } else {
+            row.style.display = 'none';
           }
         });
-
-        if (match) {
-          row.style.display = 'table-row';
-        } else {
-          row.style.display = 'none';
-        }
       });
     });
   });

@@ -138,10 +138,11 @@ mysqli_query($conn, $insertQuery);
         phone = '$updatedPhone',
         dob = '$updatedDob',
         gender = '$updatedGender',
+        username = '$updatedLoginUsername',
+        password = '$updatedLoginPassword',
         occupation = '$updatedOccupation',
         active = '$updatedActive'
         WHERE id = $id";
-
       if ($conn->query($updateQuery) === TRUE) {
       } else {
         echo "Error updating record: " . $conn->error;

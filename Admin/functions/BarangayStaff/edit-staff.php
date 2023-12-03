@@ -55,8 +55,11 @@
         $position = $_POST['position'];
 
         // Update the data in the database
-        $query = "UPDATE barangay_staff SET resident_id='$residentid', position='$position', date_updated=NOW() WHERE id='$id'";
+        $query = "UPDATE barangay_staff SET resident_id='$residentid', position='$position', date_updated=NOW(), active = 1 WHERE id='$id'";
         mysqli_query($conn, $query);
+        $updateQuery = "UPDATE login_acc SET role = 'admin' WHERE id = '$residentid'";
+            mysqli_query($conn, $updateQuery);
+             
         mysqli_close($conn);
 
         // Redirect to the show-staff.php page
@@ -126,6 +129,7 @@
                 <label for="position">Position:</label>
                 <select id="position" name="position" required>
                     <option value="">Select Position</option>
+                    <option value="Office Staff" <?php if ($position === 'Office Staff') echo 'selected'; ?>>Office Staff</option>
                     <option value="Barangay Chairman" <?php if ($position === 'Barangay Chairman') echo 'selected'; ?>>Barangay Chairman</option>
                     <option value="Barangay Kagawad" <?php if ($position === 'Barangay Kagawad') echo 'selected'; ?>>Barangay Kagawad</option>
                     <option value="Barangay Secretary" <?php if ($position === 'Barangay Secretary') echo 'selected'; ?>>Barangay Secretary</option>

@@ -51,7 +51,7 @@ include_once "OfficialsModel.php";
             formData.append('pdfdata', pdfData);
             formData.append('Created_at', ' <?php //echo $_GET['created'] ?>');
             formData.append('Res_id', '<?php //echo  $_GET['resId']?>');
-            formData.append('signaid', '<?php echo  $_GET['sigfinu']?>');
+            formData.append('signaid', '<?php //echo  $_GET['sigfinu']?> ');
             formData.append('certids', '<?php echo  $_GET['certid']?>');
            
             var xhr = new XMLHttpRequest();

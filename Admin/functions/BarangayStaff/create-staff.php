@@ -59,7 +59,12 @@
         if (mysqli_query($conn, $query)) {
            
             $message = "Barangay staff created successfully.";
-            
+            $updateQuery = "UPDATE login_acc SET role = 'admin' WHERE id = '$residentName'";
+
+            if (mysqli_query($conn, $updateQuery)) {
+               
+            } else {
+            }
 
         } else {
             
@@ -87,6 +92,7 @@
                 <label for="position">Position:</label>
                 <select id="position" name="position" required>
                     <option value="">Select Position</option>
+                    <option value="Office Staff">Office Staff</option>
                     <option value="Barangay Chairman">Barangay Chairman</option>
                     <option value="Barangay Kagawad">Barangay Kagawad</option>
                     <option value="Barangay Secretary">Barangay Secretary</option>

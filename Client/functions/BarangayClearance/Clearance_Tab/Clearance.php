@@ -58,9 +58,9 @@
 </div>
 <div class="frmbld-input-flex">
     <div class="frgp">
-        <label class="ctrl-label cls-2" for="Contact">Contact</label>
+        <label class="ctrl-label cls-2" for="phone">Contact</label>
         <div class="cls-10">
-            <textarea id="Purpose" name="Contact" required="" class="form-ctrl" rows="1"></textarea>
+            <textarea id="phone" name="phone" required="" class="form-ctrl" rows="1"></textarea>
         </div>
     </div>
     <div class="frgp">

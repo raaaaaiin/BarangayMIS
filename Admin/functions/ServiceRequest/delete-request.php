@@ -23,4 +23,16 @@ if ($stmt->execute()) {
 }
 
 $stmt->close();
+
+$sqlisms = "INSERT INTO sms_messages (phone_number, message_content, send_date, sent_date, active_status)
+	 SELECT fci.phone AS phone_number,
+			'Your Certificate is Rejected, if this is a mistake, please pay us a visit to clarify.\n\nRegards, Sitio Igiban Services' AS message_content,
+			NOW() AS send_date,
+			NULL AS sent_date,
+			0 AS active_status
+	 FROM finance_clearance_issued fci
+	 WHERE fci.id = $id;
+	 ";
+	 
+	 mysqli_query($conn, $sqlisms);
 ?>

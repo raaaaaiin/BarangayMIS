@@ -7,6 +7,15 @@
         // Delete the staff record from the database
         $query = "UPDATE barangay_staff SET active = 0 WHERE id='$id'";
         mysqli_query($conn, $query);
+        $updateQuery = "UPDATE login_acc 
+        SET role = 'client' 
+        WHERE id = (
+            SELECT resident_id 
+            FROM barangay_staff 
+            WHERE id = $id)";
+
+        mysqli_query($conn, $updateQuery);
+        
         mysqli_close($conn);
 
         // Redirect to the show-staff.php page

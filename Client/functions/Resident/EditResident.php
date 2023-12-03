@@ -151,6 +151,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
         phone = '$updatedPhone',
         dob = '$updatedDob',
         gender = '$updatedGender',
+        username = '$updatedLoginUsername',
+        password = '$updatedLoginPassword',
         occupation = '$updatedOccupation',
         active = '$updatedActive'
         WHERE id = $id";
