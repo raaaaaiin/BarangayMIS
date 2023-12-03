@@ -1,1 +1,1 @@
-<?php $db = mysqli_connect('localhost','root','','barangaymis',3306) or die('Error connecting to MySQL server.'); ?>
+<?php $db = mysqli_connect('localhost','naerlexc_root','Marcraineer0089!','naerlexc_barangaymis',3306) or die('Error connecting to MySQL server.'); ?>
